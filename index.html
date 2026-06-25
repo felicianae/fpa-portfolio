@@ -347,14 +347,14 @@ textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var
     </div>
     <div class="card">
       <div class="card-title flex-b">Generated Prompt <button class="copy-pill" onclick="copyPrompt()">Copy</button></div>
-      <div id="ve-out"><div style="color:var(--gray-500);font-size:12px;font-style:italic;margin-top:16px">Paste a variance table and click "Build prompt" — copy the result into a new Claude chat to get CFO-ready commentary in 60 seconds.</div></div>
+      <div id="ve-out"><div style="color:var(--gray-500);font-size:12px;font-style:italic;margin-top:16px">Paste a variance table and click "Build prompt" — copy the result into a new Claude chat to get Leadership-ready commentary in 60 seconds.</div></div>
     </div>
   </div>
   <div class="card gap">
     <div class="card-title">Workflow</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding-top:4px">
       <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">1</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste variance table</div><div style="font-size:11px;color:var(--gray-500)">Copy Section 3 from Budget_vs_Actuals Excel tab or any pipe-delimited table</div></div></div>
-      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">2</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Build prompt</div><div style="font-size:11px;color:var(--gray-500)">Generates a pre-engineered Claude prompt with CFO communication standards built in</div></div></div>
+      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">2</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Build prompt</div><div style="font-size:11px;color:var(--gray-500)">Generates a pre-engineered Claude prompt with Leadership communication standards built in</div></div></div>
       <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">3</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste into Claude</div><div style="font-size:11px;color:var(--gray-500)">Open Claude.ai, paste prompt — get executive summary, key variances, outlook in 60 seconds</div></div></div>
     </div>
   </div>
@@ -431,7 +431,7 @@ function genPrompt(){
   if(!inp){alert('Paste a variance table first.');return;}
   const period=document.getElementById('ve-period').value;
   const ctx=document.getElementById('ve-context').value;
-  _prompt=`You are a senior FP&A director writing variance commentary for a CFO audience. Direct, number-first, no filler phrases. Fast, specific, action-oriented.\n\nPeriod: ${period}\nContext: ${ctx}\n\nVariance table:\n${inp}\n\nOutput exactly three sections:\n\nEXECUTIVE SUMMARY\n2-3 sentences. Lead with the most important number. State beat/miss at operating income level and name the single biggest driver.\n\nKEY VARIANCES (top 3 by absolute $ impact)\nOne sentence each. Format: [Line]: actual vs budget, $ and % magnitude, one-line driver. Unfavorable in parentheses.\n\nRISK & OUTLOOK\n2-3 sentences. One risk that could persist. One opportunity. Forward-looking only.`;
+  _prompt=`You are a senior FP&A director writing variance commentary for a Leadership audience. Direct, number-first, no filler phrases. Fast, specific, action-oriented.\n\nPeriod: ${period}\nContext: ${ctx}\n\nVariance table:\n${inp}\n\nOutput exactly three sections:\n\nEXECUTIVE SUMMARY\n2-3 sentences. Lead with the most important number. State beat/miss at operating income level and name the single biggest driver.\n\nKEY VARIANCES (top 3 by absolute $ impact)\nOne sentence each. Format: [Line]: actual vs budget, $ and % magnitude, one-line driver. Unfavorable in parentheses.\n\nRISK & OUTLOOK\n2-3 sentences. One risk that could persist. One opportunity. Forward-looking only.`;
   document.getElementById('ve-out').innerHTML=`<div class="output-text">${_prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
 }
 
