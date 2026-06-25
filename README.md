@@ -16,7 +16,7 @@ replicating the FP&A workflow. Built as a portfolio project using Claude Cowork.
 2. Interactive Dashboard (this repo)
 - **Overview** — Revenue trend, take rate story, Budget vs Actuals RAG, HC summary
 - **Scenario Analysis** — Live BASE/BULL/BEAR toggle across KPIs, forecast, sensitivities
-- **Variance Engine** — Paste variance table → generate CFO-ready Claude prompt in 1 click
+- **Variance Engine** — Paste variance table → generate commentary Claude prompt in 1 click
 
 ---
 
