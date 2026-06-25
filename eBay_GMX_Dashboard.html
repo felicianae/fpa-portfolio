@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eBay GMX — Strategic Finance Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+:root{--navy:#1B2A4A;--navy-light:#243660;--red:#C8002A;--green:#1E6B3C;--green-bg:#EAF3EE;--red-bg:#FCEAEA;--gray-50:#F5F6F8;--gray-100:#EAECF0;--gray-300:#C5CAD5;--gray-500:#6B7280;--gray-700:#374151;--gray-900:#111827;--white:#FFFFFF;--font:'Inter',-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);font-size:13px}
+.header{background:var(--navy);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:44px}
+.header-left{display:flex;align-items:center;gap:16px}
+.header-logo{font-size:18px;font-weight:700;color:white;letter-spacing:-0.5px}
+.header-logo span{color:#E8A020}
+.header-title{font-size:12px;color:rgba(255,255,255,0.6);font-weight:400;padding-left:16px;border-left:1px solid rgba(255,255,255,0.15)}
+.header-kpis{display:flex;gap:20px}
+.hkpi{text-align:right}
+.hkpi-label{font-size:10px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:.05em}
+.hkpi-value{font-size:13px;font-weight:600;color:white}
+.delta-up{color:#5CB85C;font-size:11px}
+.delta-down{color:#E8756A;font-size:11px}
+.tabs{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 20px;display:flex}
+.tab{padding:10px 16px;font-size:12px;font-weight:500;color:var(--gray-500);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.tab:hover{color:var(--gray-900)}
+.tab.active{color:var(--navy);border-bottom-color:var(--navy)}
+.main{padding:16px 20px}
+.panel{display:none}
+.panel.active{display:block}
+.grid-2{display:grid;grid-template-columns:1fr 340px;gap:12px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.grid-2-eq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:var(--white);border:1px solid var(--gray-100);border-radius:4px;padding:14px 16px}
+.card-title{font-size:10px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.card-title span{font-weight:400;text-transform:none;letter-spacing:0;color:var(--gray-500);font-size:10px}
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
+.kpi{background:var(--white);border:1px solid var(--gray-100);border-radius:4px;padding:10px 12px}
+.kpi-label{font-size:10px;color:var(--gray-500);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.kpi-value{font-size:20px;font-weight:700;color:var(--gray-900);letter-spacing:-.5px;line-height:1}
+.kpi-sub{font-size:11px;margin-top:3px}
+.data-table{width:100%;border-collapse:collapse;font-size:12px}
+.data-table th{font-size:10px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.05em;padding:4px 6px;text-align:right;border-bottom:1px solid var(--gray-100)}
+.data-table th:first-child{text-align:left}
+.data-table td{padding:5px 6px;text-align:right;border-bottom:1px solid var(--gray-50);font-variant-numeric:tabular-nums;color:var(--gray-700)}
+.data-table td:first-child{text-align:left;color:var(--gray-900);font-weight:500}
+.data-table tr:last-child td{border-bottom:none}
+.data-table .total td{font-weight:600;color:var(--gray-900);border-top:1px solid var(--gray-300)}
+.neg{color:var(--red)!important}
+.pos{color:var(--green)!important}
+.rag-g{background:#EAF3EE;color:var(--green);font-size:10px;font-weight:600;padding:1px 5px;border-radius:2px}
+.rag-r{background:#FCEAEA;color:var(--red);font-size:10px;font-weight:600;padding:1px 5px;border-radius:2px}
+.chart-wrap{width:100%;overflow:hidden}
+svg text{font-family:var(--font)}
+.scenario-toggle{display:flex;gap:0;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:4px;padding:3px;width:fit-content;margin-bottom:14px}
+.scenario-btn{padding:5px 14px;font-size:11px;font-weight:600;border:none;background:none;cursor:pointer;border-radius:2px;color:var(--gray-500);transition:all .15s}
+.scenario-btn.active{background:var(--white);color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.scenario-btn.bull.active{color:var(--green)}
+.scenario-btn.bear.active{color:var(--red)}
+.commentary{background:var(--gray-50);border-left:3px solid var(--navy);padding:10px 12px;font-size:12px;line-height:1.6;color:var(--gray-700);font-style:italic;border-radius:0 4px 4px 0;margin-top:10px}
+textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var(--gray-900);background:var(--gray-50);border:1px solid var(--gray-100);border-radius:4px;padding:10px;resize:vertical;line-height:1.5}
+.gen-btn{margin-top:8px;padding:8px 16px;background:var(--navy);color:white;border:none;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);transition:background .15s}
+.gen-btn:hover{background:var(--navy-light)}
+.sample-link{font-size:11px;color:var(--gray-500);text-decoration:underline;cursor:pointer;margin-top:4px;display:inline-block}
+.output-text{font-size:11px;line-height:1.65;color:var(--gray-700);white-space:pre-wrap;font-family:monospace;background:var(--gray-50);padding:10px;border-radius:3px;border:1px solid var(--gray-100);max-height:340px;overflow-y:auto}
+.copy-pill{font-size:10px;background:var(--gray-50);border:1px solid var(--gray-100);border-radius:2px;padding:2px 8px;cursor:pointer;color:var(--gray-500)}
+.sens-table{border-collapse:collapse;font-size:11px;width:100%}
+.sens-table th{background:var(--navy);color:white;padding:4px 8px;font-size:10px;font-weight:500;text-align:center}
+.sens-table th.rl{background:var(--gray-50);color:var(--gray-700);text-align:left}
+.sens-table td{padding:4px 8px;text-align:center;border:1px solid var(--gray-100);font-variant-numeric:tabular-nums;font-size:11px}
+.sens-table td.rl{text-align:left;background:var(--gray-50);font-weight:500;color:var(--gray-700)}
+.sg{background:#D1FAE5;color:#065F46;font-weight:600}
+.sr{background:#FEE2E2;color:#991B1B;font-weight:600}
+.sb{background:#EEF2FF;color:#3730A3;font-weight:600}
+.gap{margin-top:12px}
+.flex-b{display:flex;align-items:center;justify-content:space-between}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo">e<span>b</span>ay</div>
+    <div class="header-title">GMX Strategic Finance Dashboard &nbsp;·&nbsp; FP&A Automation Portfolio &nbsp;·&nbsp; As of Q1 2026A</div>
+  </div>
+  <div class="header-kpis">
+    <div class="hkpi"><div class="hkpi-label">GMX Rev FY2025A</div><div class="hkpi-value">$8.3B <span class="delta-up">↑7.9%</span></div></div>
+    <div class="hkpi"><div class="hkpi-label">Take Rate</div><div class="hkpi-value">13.9% <span class="delta-up">↑0.1pp</span></div></div>
+    <div class="hkpi"><div class="hkpi-label">Op Margin vs Bgt</div><div class="hkpi-value">20.3% <span class="delta-down">↓3.7pp</span></div></div>
+    <div class="hkpi"><div class="hkpi-label">FCF FY2025A</div><div class="hkpi-value">$1.5B <span class="delta-down">↓24%</span></div></div>
+    <div class="hkpi"><div class="hkpi-label">Q1 2026A Rev</div><div class="hkpi-value">$3.1B <span class="delta-up">↑5.5%</span></div></div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('overview')">Overview</div>
+  <div class="tab" onclick="switchTab('scenario')">Scenario Analysis</div>
+  <div class="tab" onclick="switchTab('variance')">Variance Engine</div>
+</div>
+
+<div class="main">
+
+<!-- OVERVIEW -->
+<div class="panel active" id="panel-overview">
+  <div class="kpi-row">
+    <div class="kpi"><div class="kpi-label">FY2025 Revenue</div><div class="kpi-value">$11.1B</div><div class="kpi-sub delta-up">+7.9% YoY · Beat +$354M</div></div>
+    <div class="kpi"><div class="kpi-label">GMV FY2025</div><div class="kpi-value">$79.6B</div><div class="kpi-sub delta-up">+6.6% YoY · Recovery</div></div>
+    <div class="kpi"><div class="kpi-label">Op Income</div><div class="kpi-value">$2.3B</div><div class="kpi-sub delta-down">Missed budget ($323M)</div></div>
+    <div class="kpi"><div class="kpi-label">Active Buyers</div><div class="kpi-value">135M</div><div class="kpi-sub" style="color:var(--gray-500)">Stabilizing · Peak 162M</div></div>
+    <div class="kpi"><div class="kpi-label">Diluted Shares</div><div class="kpi-value">453M</div><div class="kpi-sub delta-up">↓21% since FY2021</div></div>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-title">Net Revenue & GMX Proxy <span>$B · FY2021–Q1 2026A</span></div>
+        <div class="chart-wrap">
+          <svg viewBox="0 0 560 185" xmlns="http://www.w3.org/2000/svg">
+            <line x1="50" y1="20" x2="550" y2="20" stroke="#EAECF0" stroke-width="0.5"/>
+            <line x1="50" y1="60" x2="550" y2="60" stroke="#EAECF0" stroke-width="0.5"/>
+            <line x1="50" y1="100" x2="550" y2="100" stroke="#EAECF0" stroke-width="0.5"/>
+            <line x1="50" y1="140" x2="550" y2="140" stroke="#EAECF0" stroke-width="0.5"/>
+            <text x="44" y="24" text-anchor="end" font-size="9" fill="#9CA3AF">$12B</text>
+            <text x="44" y="64" text-anchor="end" font-size="9" fill="#9CA3AF">$11B</text>
+            <text x="44" y="104" text-anchor="end" font-size="9" fill="#9CA3AF">$10B</text>
+            <text x="44" y="144" text-anchor="end" font-size="9" fill="#9CA3AF">$9B</text>
+            <rect x="66" y="83" width="50" height="57" fill="#1B2A4A" opacity="0.85" rx="1"/>
+            <rect x="146" y="108" width="50" height="32" fill="#1B2A4A" opacity="0.85" rx="1"/>
+            <rect x="226" y="96" width="50" height="44" fill="#1B2A4A" opacity="0.85" rx="1"/>
+            <rect x="306" y="89" width="50" height="51" fill="#1B2A4A" opacity="0.85" rx="1"/>
+            <rect x="386" y="56" width="50" height="84" fill="#1B2A4A" rx="1"/>
+            <rect x="466" y="49" width="50" height="12" fill="#C8002A" rx="1" opacity="0.75"/>
+            <text x="491" y="45" text-anchor="middle" font-size="8" fill="#C8002A" font-weight="600">Q1A ann.</text>
+            <polyline points="91,115 171,128 251,120 331,115 411,82" fill="none" stroke="#C8002A" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <text x="91" y="79" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">10.4</text>
+            <text x="171" y="104" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">9.8</text>
+            <text x="251" y="92" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">10.1</text>
+            <text x="331" y="85" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">10.3</text>
+            <text x="411" y="52" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">11.1</text>
+            <text x="91" y="172" text-anchor="middle" font-size="9" fill="#6B7280">FY21</text>
+            <text x="171" y="172" text-anchor="middle" font-size="9" fill="#6B7280">FY22</text>
+            <text x="251" y="172" text-anchor="middle" font-size="9" fill="#6B7280">FY23</text>
+            <text x="331" y="172" text-anchor="middle" font-size="9" fill="#6B7280">FY24</text>
+            <text x="411" y="172" text-anchor="middle" font-size="9" fill="#6B7280">FY25</text>
+            <text x="491" y="172" text-anchor="middle" font-size="9" fill="#C8002A">Q1'26</text>
+            <rect x="52" y="10" width="10" height="7" fill="#1B2A4A" rx="1"/>
+            <text x="65" y="17" font-size="9" fill="#6B7280">eBay Consolidated</text>
+            <line x1="158" y1="14" x2="172" y2="14" stroke="#C8002A" stroke-width="1.5" stroke-dasharray="3,2"/>
+            <text x="175" y="17" font-size="9" fill="#6B7280">GMX Proxy (~75%)</text>
+          </svg>
+        </div>
+      </div>
+      <div class="card gap">
+        <div class="card-title">Take Rate Expansion Story <span>Revenue = GMV × Take Rate</span></div>
+        <svg viewBox="0 0 560 130" xmlns="http://www.w3.org/2000/svg">
+          <line x1="50" y1="20" x2="510" y2="20" stroke="#EAECF0" stroke-width="0.5"/>
+          <line x1="50" y1="55" x2="510" y2="55" stroke="#EAECF0" stroke-width="0.5"/>
+          <line x1="50" y1="90" x2="510" y2="90" stroke="#EAECF0" stroke-width="0.5"/>
+          <rect x="56" y="20" width="35" height="70" fill="#E5E7EB" rx="1"/>
+          <rect x="126" y="21" width="35" height="69" fill="#E5E7EB" rx="1"/>
+          <rect x="196" y="62" width="35" height="28" fill="#DBEAFE" rx="1"/>
+          <rect x="266" y="63" width="35" height="27" fill="#DBEAFE" rx="1"/>
+          <rect x="336" y="59" width="35" height="31" fill="#DBEAFE" rx="1"/>
+          <rect x="406" y="43" width="35" height="47" fill="#BFDBFE" rx="1"/>
+          <polyline points="73,87 143,74 213,64 283,57 353,57 423,56" fill="none" stroke="#1B2A4A" stroke-width="2"/>
+          <circle cx="73" cy="87" r="3" fill="#1B2A4A"/>
+          <circle cx="143" cy="74" r="3" fill="#1B2A4A"/>
+          <circle cx="213" cy="64" r="3" fill="#1B2A4A"/>
+          <circle cx="283" cy="57" r="3" fill="#1B2A4A"/>
+          <circle cx="353" cy="57" r="3" fill="#1B2A4A"/>
+          <circle cx="423" cy="56" r="3.5" fill="#C8002A"/>
+          <text x="73" y="83" text-anchor="middle" font-size="8" fill="#1B2A4A">10.2%</text>
+          <text x="143" y="70" text-anchor="middle" font-size="8" fill="#1B2A4A">11.9%</text>
+          <text x="213" y="60" text-anchor="middle" font-size="8" fill="#1B2A4A">13.3%</text>
+          <text x="283" y="53" text-anchor="middle" font-size="8" fill="#1B2A4A">13.8%</text>
+          <text x="353" y="53" text-anchor="middle" font-size="8" fill="#1B2A4A">13.8%</text>
+          <text x="423" y="52" text-anchor="middle" font-size="8" fill="#C8002A" font-weight="600">13.9%</text>
+          <text x="73" y="112" text-anchor="middle" font-size="9" fill="#6B7280">FY20</text>
+          <text x="143" y="112" text-anchor="middle" font-size="9" fill="#6B7280">FY21</text>
+          <text x="213" y="112" text-anchor="middle" font-size="9" fill="#6B7280">FY22</text>
+          <text x="283" y="112" text-anchor="middle" font-size="9" fill="#6B7280">FY23</text>
+          <text x="353" y="112" text-anchor="middle" font-size="9" fill="#6B7280">FY24</text>
+          <text x="423" y="112" text-anchor="middle" font-size="9" fill="#6B7280">FY25</text>
+          <rect x="52" y="118" width="8" height="6" fill="#BFDBFE" rx="1"/><text x="63" y="124" font-size="9" fill="#6B7280">GMV ($B)</text>
+          <line x1="110" y1="121" x2="122" y2="121" stroke="#1B2A4A" stroke-width="2"/><text x="125" y="124" font-size="9" fill="#6B7280">Take Rate</text>
+          <text x="44" y="24" text-anchor="end" font-size="8" fill="#9CA3AF">15%</text>
+          <text x="44" y="59" text-anchor="end" font-size="8" fill="#9CA3AF">12%</text>
+          <text x="44" y="93" text-anchor="end" font-size="8" fill="#9CA3AF">9%</text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">FY2025 Budget vs Actuals <span>RAG · $mm</span></div>
+        <table class="data-table">
+          <thead><tr><th>Metric</th><th>Budget</th><th>Actual</th><th>Var%</th><th></th></tr></thead>
+          <tbody>
+            <tr><td>Net Revenue</td><td>10,746</td><td>11,100</td><td class="pos">+3.3%</td><td><span class="rag-g">G</span></td></tr>
+            <tr><td>Gross Profit</td><td>7,898</td><td>8,038</td><td class="pos">+1.8%</td><td><span class="rag-g">G</span></td></tr>
+            <tr><td>Gross Margin</td><td>73.5%</td><td>72.4%</td><td class="neg">(1.1pp)</td><td><span class="rag-r">R</span></td></tr>
+            <tr><td>S&amp;M</td><td>1,318</td><td>1,393</td><td class="neg">(5.7%)</td><td><span class="rag-r">R</span></td></tr>
+            <tr><td>Product Dev</td><td>1,078</td><td>1,002</td><td class="pos">+7.1%</td><td><span class="rag-g">G</span></td></tr>
+            <tr><td style="color:var(--red);font-weight:600">G&amp;A ⚠</td><td>923</td><td style="color:var(--red);font-weight:600">1,390</td><td class="neg">(50.6%)</td><td><span class="rag-r">R</span></td></tr>
+            <tr class="total"><td>Op Income</td><td>2,581</td><td>2,258</td><td class="neg">(12.5%)</td><td><span class="rag-r">R</span></td></tr>
+            <tr><td>Op Margin</td><td>24.0%</td><td>20.3%</td><td class="neg">(3.7pp)</td><td><span class="rag-r">R</span></td></tr>
+            <tr><td>FCF</td><td>1,981</td><td>1,484</td><td class="neg">(25.1%)</td><td><span class="rag-r">R</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card gap">
+        <div class="card-title">Management Commentary</div>
+        <div class="commentary">FY2025 revenue beat budget by $354M (+3.3%), driven by take rate expansion to 13.9% and GMV recovery to $79.6B — the first dual acceleration since FY2020. Operating income missed by $323M, entirely attributable to a $467M G&A overage from one-time tax and legal settlements. FCF compressed 24% YoY, funded via net debt expansion ($3.2B→$3.8B) alongside $2.5B in buybacks.</div>
+      </div>
+      <div class="card gap">
+        <div class="card-title">HC Model Summary <span>GMX mock org · 450 HC · 1.51x loaded</span></div>
+        <table class="data-table">
+          <thead><tr><th>Function</th><th>HC</th><th>Loaded $mm</th><th>$/Head $K</th></tr></thead>
+          <tbody>
+            <tr><td>Engineering</td><td>180</td><td>41.8</td><td>232</td></tr>
+            <tr><td>Product Mgmt</td><td>70</td><td>13.9</td><td>199</td></tr>
+            <tr><td>Operations &amp; CS</td><td>80</td><td>12.4</td><td>155</td></tr>
+            <tr><td>Marketing</td><td>50</td><td>9.9</td><td>198</td></tr>
+            <tr><td>Finance &amp; Analytics</td><td>40</td><td>8.6</td><td>215</td></tr>
+            <tr><td>Legal &amp; Compliance</td><td>30</td><td>7.2</td><td>240</td></tr>
+            <tr class="total"><td>TOTAL GMX</td><td>450</td><td>93.8</td><td>209</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENARIO -->
+<div class="panel" id="panel-scenario">
+  <div class="scenario-toggle">
+    <button class="scenario-btn active" onclick="setSc('base')">BASE</button>
+    <button class="scenario-btn bull" onclick="setSc('bull')">BULL</button>
+    <button class="scenario-btn bear" onclick="setSc('bear')">BEAR</button>
+  </div>
+  <div class="grid-2">
+    <div>
+      <div class="card">
+        <div class="card-title">FY2026E Scenario Snapshot <span id="sc-label">Steady-state execution</span></div>
+        <div class="grid-3" style="margin-bottom:12px">
+          <div class="kpi"><div class="kpi-label">GMX Revenue</div><div class="kpi-value" id="sc-rev" style="font-size:18px">$9.0B</div><div class="kpi-sub" id="sc-revg">+8.0% YoY</div></div>
+          <div class="kpi"><div class="kpi-label">Op Income</div><div class="kpi-value" id="sc-oi" style="font-size:18px">$3.0B</div><div class="kpi-sub" id="sc-oig">+17.4% YoY</div></div>
+          <div class="kpi"><div class="kpi-label">Ending HC</div><div class="kpi-value" id="sc-hc" style="font-size:18px">450</div><div class="kpi-sub" id="sc-hcg" style="color:var(--gray-500)">Flat YoY</div></div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Driver</th><th>FY2025A</th><th>FY2026E</th><th>Change</th></tr></thead>
+          <tbody id="sc-tbody"></tbody>
+        </table>
+        <div class="commentary" id="sc-comm"></div>
+      </div>
+      <div class="card gap">
+        <div class="card-title">Rolling Forecast — Q1A + Q2–Q4 2026E <span id="rf-label">BASE</span></div>
+        <svg viewBox="0 0 520 140" xmlns="http://www.w3.org/2000/svg">
+          <line x1="50" y1="20" x2="510" y2="20" stroke="#EAECF0" stroke-width="0.5"/>
+          <line x1="50" y1="55" x2="510" y2="55" stroke="#EAECF0" stroke-width="0.5"/>
+          <line x1="50" y1="90" x2="510" y2="90" stroke="#EAECF0" stroke-width="0.5"/>
+          <text x="44" y="24" text-anchor="end" font-size="9" fill="#9CA3AF">$2.5B</text>
+          <text x="44" y="59" text-anchor="end" font-size="9" fill="#9CA3AF">$2.3B</text>
+          <text x="44" y="94" text-anchor="end" font-size="9" fill="#9CA3AF">$2.1B</text>
+          <rect x="70" y="53" width="70" height="57" fill="#1B2A4A" rx="1"/>
+          <text x="105" y="49" text-anchor="middle" font-size="9" fill="#1B2A4A" font-weight="600">$2,317</text>
+          <text x="105" y="122" text-anchor="middle" font-size="9" fill="#6B7280">Q1 Actual</text>
+          <rect x="185" y="56" width="70" height="54" rx="1" id="rf-q2"/>
+          <rect x="305" y="56" width="70" height="54" rx="1" id="rf-q3"/>
+          <rect x="425" y="56" width="70" height="54" rx="1" id="rf-q4"/>
+          <text x="220" y="52" text-anchor="middle" font-size="9" id="rf-q2l" font-weight="600">$2,225</text>
+          <text x="340" y="52" text-anchor="middle" font-size="9" id="rf-q3l" font-weight="600">$2,225</text>
+          <text x="460" y="52" text-anchor="middle" font-size="9" id="rf-q4l" font-weight="600">$2,225</text>
+          <text x="220" y="122" text-anchor="middle" font-size="9" fill="#6B7280">Q2E</text>
+          <text x="340" y="122" text-anchor="middle" font-size="9" fill="#6B7280">Q3E</text>
+          <text x="460" y="122" text-anchor="middle" font-size="9" fill="#6B7280">Q4E</text>
+          <rect x="50" y="108" width="460" height="5" fill="#EAECF0" rx="2"/>
+          <rect x="50" y="108" width="115" height="5" rx="2" id="rf-pace"/>
+          <text x="175" y="116" font-size="8.5" fill="#6B7280" id="rf-pacet">Q1: 25.8% of $8,991M target</text>
+        </svg>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Sensitivity — Op Income ($mm)</div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:8px">X: Revenue Growth · Y: G&A Growth · <span style="color:#065F46">Green &gt;$2,800M</span> · <span style="color:#991B1B">Red &lt;$2,200M</span></div>
+        <table class="sens-table">
+          <thead><tr><th class="rl">G&amp;A \ Rev</th><th>+3%</th><th>+5%</th><th>+8%</th><th>+10%</th><th>+12%</th></tr></thead>
+          <tbody>
+            <tr><td class="rl">−10%</td><td>2,714</td><td class="sg">2,834</td><td class="sg">3,015</td><td class="sg">3,136</td><td class="sg">3,257</td></tr>
+            <tr><td class="rl">−5%</td><td>2,690</td><td>2,811</td><td class="sb">2,991</td><td class="sg">3,112</td><td class="sg">3,233</td></tr>
+            <tr><td class="rl">Flat</td><td>2,666</td><td>2,787</td><td>2,967</td><td class="sg">3,088</td><td class="sg">3,209</td></tr>
+            <tr><td class="rl">+5%</td><td>2,642</td><td>2,763</td><td>2,943</td><td class="sg">3,064</td><td class="sg">3,185</td></tr>
+            <tr><td class="rl">+10%</td><td>2,618</td><td>2,739</td><td>2,920</td><td class="sg">3,040</td><td class="sg">3,161</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card gap">
+        <div class="card-title">Sensitivity — Personnel OPEX ($mm)</div>
+        <div style="font-size:10px;color:var(--gray-500);margin-bottom:8px">X: Net New Hires · Y: Merit %</div>
+        <table class="sens-table">
+          <thead><tr><th class="rl">Merit \ HC Δ</th><th>−45</th><th>−20</th><th>0</th><th>+15</th><th>+30</th></tr></thead>
+          <tbody>
+            <tr><td class="rl">0%</td><td class="sg">89.1</td><td>91.7</td><td>93.8</td><td>95.4</td><td>96.9</td></tr>
+            <tr><td class="rl">2.0%</td><td class="sg">91.0</td><td>93.6</td><td>95.7</td><td>97.2</td><td>98.8</td></tr>
+            <tr><td class="rl">3.5%</td><td>92.4</td><td>95.0</td><td class="sb">97.1</td><td class="sr">98.7</td><td class="sr">100.2</td></tr>
+            <tr><td class="rl">5.0%</td><td>93.8</td><td>96.4</td><td>98.5</td><td class="sr">100.1</td><td class="sr">101.6</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card gap">
+        <div class="card-title">Three-Scenario Comparison</div>
+        <table class="data-table">
+          <thead><tr><th>Metric</th><th style="color:#1B2A4A">BASE</th><th style="color:#1E6B3C">BULL</th><th style="color:#C8002A">BEAR</th></tr></thead>
+          <tbody>
+            <tr><td>Revenue ($B)</td><td>9.0</td><td>9.3</td><td>8.6</td></tr>
+            <tr><td>Rev Growth</td><td>+8%</td><td>+12%</td><td>+3%</td></tr>
+            <tr><td>Op Income ($B)</td><td>3.0</td><td>3.2</td><td>2.8</td></tr>
+            <tr><td>Op Margin</td><td>33.3%</td><td>34.2%</td><td>32.8%</td></tr>
+            <tr><td>Personnel ($mm)</td><td>97.1</td><td>98.7</td><td>89.1</td></tr>
+            <tr class="total"><td>Ending HC</td><td>450</td><td>465</td><td>405</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VARIANCE ENGINE -->
+<div class="panel" id="panel-variance">
+  <div class="grid-2-eq">
+    <div class="card">
+      <div class="card-title">Input <span>Paste variance table · pipe-delimited</span></div>
+      <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+        <div><label style="font-size:11px;color:var(--gray-500)">Period &nbsp;</label><select id="ve-period" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>FY2025 full year</option><option>Q1 2026</option><option>Q4 2025</option></select></div>
+        <div><label style="font-size:11px;color:var(--gray-500)">Context &nbsp;</label><select id="ve-context" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>eBay GMX — COO org</option><option>eBay consolidated</option></select></div>
+      </div>
+      <textarea id="ve-input" rows="14" placeholder="Paste variance table here..."></textarea>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
+        <span class="sample-link" onclick="loadSample()">↓ Load eBay FY2025 actuals</span>
+        <button class="gen-btn" onclick="genPrompt()">Build prompt ↗</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title flex-b">Generated Prompt <button class="copy-pill" onclick="copyPrompt()">Copy</button></div>
+      <div id="ve-out"><div style="color:var(--gray-500);font-size:12px;font-style:italic;margin-top:16px">Paste a variance table and click "Build prompt" — copy the result into a new Claude chat to get CFO-ready commentary in 60 seconds.</div></div>
+    </div>
+  </div>
+  <div class="card gap">
+    <div class="card-title">Workflow</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding-top:4px">
+      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">1</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste variance table</div><div style="font-size:11px;color:var(--gray-500)">Copy Section 3 from Budget_vs_Actuals Excel tab or any pipe-delimited table</div></div></div>
+      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">2</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Build prompt</div><div style="font-size:11px;color:var(--gray-500)">Generates a pre-engineered Claude prompt with CFO communication standards built in</div></div></div>
+      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">3</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste into Claude</div><div style="font-size:11px;color:var(--gray-500)">Open Claude.ai, paste prompt — get executive summary, key variances, outlook in 60 seconds</div></div></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const S={
+  base:{label:'Steady-state execution · +8% revenue · HC flat',rev:'$9.0B',revg:'+8.0% YoY',oi:'$3.0B',oig:'+17.4% YoY',hc:'450',hcg:'Flat YoY',color:'#1B2A4A',
+    rows:[['GMX Revenue ($mm)','8,325','8,991','+8.0%','pos'],['Gross Margin','72.4%','72.4%','Flat','flat'],['S&M ($mm)','1,436','1,436','Flat','flat'],['Product Dev ($mm)','1,238','1,299','+5.0%','neg'],['G&A ($mm)','479','455','(5.0%)','pos'],['Personnel OPEX ($mm)','93.8','97.1','+3.5%','neg'],['GMX Op Income ($mm)','2,547','2,991','+17.4%','pos'],['Op Margin %','30.6%','33.3%','+2.7pp','pos']],
+    comm:'Steady-state execution. GMX grows at +8% YoY to $9.0B. G&A normalizes -5% post FY2025 settlement, S&M flat, Product Dev +5% for AI personalization. Personnel OPEX $97.1M (+3.5% merit only), HC flat at 450. Operating income expands to $3.0B, margin improves to 33.3%.',
+    q2:'$2,225',q3:'$2,225',q4:'$2,225',pw:115,pt:'Q1: 25.8% of $8,991M target',rfl:'BASE'},
+  bull:{label:'Accelerated growth · +12% revenue · +15 net new hires',rev:'$9.3B',revg:'+12.0% YoY',oi:'$3.2B',oig:'+25.2% YoY',hc:'465',hcg:'+15 net new (Eng/PM)',color:'#1E6B3C',
+    rows:[['GMX Revenue ($mm)','8,325','9,324','+12.0%','pos'],['Gross Margin','72.4%','72.7%','+0.3pp','pos'],['S&M ($mm)','1,436','1,479','+3.0%','neg'],['Product Dev ($mm)','1,238','1,337','+8.0%','neg'],['G&A ($mm)','479','441','(8.0%)','pos'],['Personnel OPEX ($mm)','93.8','98.7','+5.2%','neg'],['GMX Op Income ($mm)','2,547','3,188','+25.2%','pos'],['Op Margin %','30.6%','34.2%','+3.6pp','pos']],
+    comm:'Accelerated growth. Take rate +0.3pp drives revenue to $9.3B (+12%). 15 net new Eng/PM hires. G&A leverages -8% on higher revenue. Operating income $3.2B, margin 34.2% — strongest since pre-COVID. Key risk: sustaining GMV momentum beyond FY2025 Tise tailwind.',
+    q2:'$2,336',q3:'$2,336',q4:'$2,336',pw:111,pt:'Q1: 24.8% of $9,324M target',rfl:'BULL'},
+  bear:{label:'Macro softening · +3% revenue · −45 HC reduction',rev:'$8.6B',revg:'+3.0% YoY',oi:'$2.8B',oig:'+10.5% YoY',hc:'405',hcg:'−45 HC reduction',color:'#C8002A',
+    rows:[['GMX Revenue ($mm)','8,325','8,575','+3.0%','pos'],['Gross Margin','72.4%','71.9%','(0.5pp)','neg'],['S&M ($mm)','1,436','1,365','(5.0%)','pos'],['Product Dev ($mm)','1,238','1,238','Flat','flat'],['G&A ($mm)','479','431','(10.0%)','pos'],['Personnel OPEX ($mm)','93.8','89.1','(5.0%)','pos'],['GMX Op Income ($mm)','2,547','2,814','+10.5%','pos'],['Op Margin %','30.6%','32.8%','+2.2pp','pos']],
+    comm:'Macro softening scenario. Revenue decelerates to +3% ($8.6B), take rate -0.5pp headwind. Cost reduction: -45 HC ($6.3M severance), S&M -5%, G&A -10%. Personnel OPEX drops to $89.1M. Op income grows to $2.8B but quality is cost-driven, not revenue-driven. Watch FCF impact into FY2027.',
+    q2:'$2,086',q3:'$2,086',q4:'$2,086',pw:122,pt:'Q1: 27.0% of $8,575M target',rfl:'BEAR'}
+};
+
+function switchTab(n){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',['overview','scenario','variance'][i]===n));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+}
+
+function setSc(k){
+  const s=S[k];
+  document.querySelectorAll('.scenario-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector(k==='base'?'.scenario-btn:first-child':k==='bull'?'.scenario-btn.bull':'.scenario-btn.bear').classList.add('active');
+  document.getElementById('sc-label').textContent=s.label;
+  ['rev','oi','hc'].forEach(id=>{document.getElementById('sc-'+id).textContent=s[id];document.getElementById('sc-'+id).style.color=s.color;});
+  document.getElementById('sc-revg').textContent=s.revg;document.getElementById('sc-revg').style.color=s.color;
+  document.getElementById('sc-oig').textContent=s.oig;
+  document.getElementById('sc-hcg').textContent=s.hcg;document.getElementById('sc-hcg').style.color=k==='bear'?'var(--red)':k==='bull'?'var(--green)':'var(--gray-500)';
+  document.getElementById('sc-tbody').innerHTML=s.rows.map((r,i)=>`<tr class="${i===6?'total':''}" ><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="${r[4]==='pos'?'pos':r[4]==='neg'?'neg':''}">${r[3]}</td></tr>`).join('');
+  document.getElementById('sc-comm').textContent=s.comm;
+  document.getElementById('rf-label').textContent=s.rfl;
+  const c=s.color,op=k==='base'?'0.65':'0.8';
+  ['rf-q2','rf-q3','rf-q4'].forEach(id=>{document.getElementById(id).setAttribute('fill',c);document.getElementById(id).setAttribute('opacity',op);});
+  ['rf-q2l','rf-q3l','rf-q4l'].forEach((id,i)=>{document.getElementById(id).textContent=[s.q2,s.q3,s.q4][i];document.getElementById(id).setAttribute('fill',c);});
+  document.getElementById('rf-pace').setAttribute('width',s.pw);document.getElementById('rf-pace').setAttribute('fill',c);
+  document.getElementById('rf-pacet').textContent=s.pt;
+}
+
+setSc('base');
+
+const SAMPLE=`Metric | Budget ($mm) | Actual ($mm) | Var $ | Var % | RAG
+Net Revenues | 10,746 | 11,100 | 354 | 3.3% | GREEN
+Gross Profit | 7,898 | 8,038 | 140 | 1.8% | GREEN
+Gross Margin % | 73.5% | 72.4% | (1.1%) | — | RED
+Sales & Marketing | 1,318 | 1,393 | (75) | (5.7%) | RED
+Product Development | 1,078 | 1,002 | 76 | 7.1% | GREEN
+G&A | 923 | 1,390 | (467) | (50.6%) | RED
+Operating Income | 2,581 | 2,258 | (323) | (12.5%) | RED
+Operating Margin % | 24.0% | 20.3% | (3.7%) | — | RED
+CapEx | 350 | 392 | (42) | (12.0%) | RED
+Free Cash Flow | 1,981 | 1,484 | (497) | (25.1%) | RED`;
+
+function loadSample(){document.getElementById('ve-input').value=SAMPLE;}
+
+let _prompt='';
+function genPrompt(){
+  const inp=document.getElementById('ve-input').value.trim();
+  if(!inp){alert('Paste a variance table first.');return;}
+  const period=document.getElementById('ve-period').value;
+  const ctx=document.getElementById('ve-context').value;
+  _prompt=`You are a senior FP&A director writing variance commentary for a CFO audience. Direct, number-first, no filler phrases. Fast, specific, action-oriented.\n\nPeriod: ${period}\nContext: ${ctx}\n\nVariance table:\n${inp}\n\nOutput exactly three sections:\n\nEXECUTIVE SUMMARY\n2-3 sentences. Lead with the most important number. State beat/miss at operating income level and name the single biggest driver.\n\nKEY VARIANCES (top 3 by absolute $ impact)\nOne sentence each. Format: [Line]: actual vs budget, $ and % magnitude, one-line driver. Unfavorable in parentheses.\n\nRISK & OUTLOOK\n2-3 sentences. One risk that could persist. One opportunity. Forward-looking only.`;
+  document.getElementById('ve-out').innerHTML=`<div class="output-text">${_prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
+}
+
+function copyPrompt(){
+  if(!_prompt){alert('Build the prompt first.');return;}
+  navigator.clipboard.writeText(_prompt).then(()=>{const b=document.querySelector('.copy-pill');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',2000);});
+}
+</script>
+</body>
+</html>
