@@ -3,16 +3,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>eBay GMX — Strategic Finance Dashboard</title>
+<title> Strategic Finance Dashboard Project (ebay Case Study) </title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-:root{--navy:#1B2A4A;--navy-light:#243660;--red:#C8002A;--green:#1E6B3C;--green-bg:#EAF3EE;--red-bg:#FCEAEA;--gray-50:#F5F6F8;--gray-100:#EAECF0;--gray-300:#C5CAD5;--gray-500:#6B7280;--gray-700:#374151;--gray-900:#111827;--white:#FFFFFF;--font:'Inter',-apple-system,sans-serif}
+:root{
+  --navy:#172542;
+  --navy-light:#22345C;
+  --ink:#111827;
+  --muted:#667085;
+
+  --red:#D14343;
+  --green:#178A4D;
+  --gold:#D6A63A;
+
+  --page:#F3F0E8;
+  --surface:#FFFDF7;
+  --surface-warm:#FAF6EA;
+  --surface-soft:#F7F1E3;
+  --border:#E4DDCF;
+
+  --gray-50:#F8F5EE;
+  --gray-100:#E9E1D2;
+  --gray-300:#D1C7B7;
+  --gray-500:#6B7280;
+  --gray-700:#374151;
+  --gray-900:#111827;
+  --white:#FFFDF7;
+
+  --font:'Inter',-apple-system,sans-serif;
+}
+  
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);font-size:13px}
+body{
+  font-family:var(--font);
+  background:
+    radial-gradient(circle at top right, rgba(214,166,58,.18), transparent 34%),
+    var(--page);
+  color:var(--gray-900);
+  font-size:13px;
+}
 .header{background:var(--navy);padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:44px}
 .header-left{display:flex;align-items:center;gap:16px}
-.header-logo{font-size:18px;font-weight:700;color:white;letter-spacing:-0.5px}
-.header-logo span{color:#E8A020}
+.header-logo{font-size:18px;font-weight:700;letter-spacing:-0.5px}
+.header-logo .logo-e{color:#E53238}
+.header-logo .logo-b{color:#0064D2}
+.header-logo .logo-a{color:#F5AF02}
+.header-logo .logo-y{color:#86B817}
 .header-title{font-size:12px;color:rgba(255,255,255,0.6);font-weight:400;padding-left:16px;border-left:1px solid rgba(255,255,255,0.15)}
 .header-kpis{display:flex;gap:20px}
 .hkpi{text-align:right}
@@ -20,21 +56,39 @@ body{font-family:var(--font);background:var(--gray-50);color:var(--gray-900);fon
 .hkpi-value{font-size:13px;font-weight:600;color:white}
 .delta-up{color:#5CB85C;font-size:11px}
 .delta-down{color:#E8756A;font-size:11px}
-.tabs{background:var(--white);border-bottom:1px solid var(--gray-100);padding:0 20px;display:flex}
+.tabs{
+  background:rgba(255,253,247,.88);
+  border-bottom:1px solid var(--border);
+  padding:0 20px;
+  display:flex;
+  backdrop-filter:blur(8px);
+}
 .tab{padding:10px 16px;font-size:12px;font-weight:500;color:var(--gray-500);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
 .tab:hover{color:var(--gray-900)}
 .tab.active{color:var(--navy);border-bottom-color:var(--navy)}
-.main{padding:16px 20px}
+.main{padding:18px 22px}
 .panel{display:none}
 .panel.active{display:block}
 .grid-2{display:grid;grid-template-columns:1fr 340px;gap:12px}
 .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .grid-2-eq{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.card{background:var(--white);border:1px solid var(--gray-100);border-radius:4px;padding:14px 16px}
+.card{
+  background:linear-gradient(180deg, var(--surface), var(--surface-warm));
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:14px 16px;
+  box-shadow:0 10px 24px rgba(23,37,66,.06);
+}
 .card-title{font-size:10px;font-weight:600;color:var(--gray-500);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
 .card-title span{font-weight:400;text-transform:none;letter-spacing:0;color:var(--gray-500);font-size:10px}
 .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:12px}
-.kpi{background:var(--white);border:1px solid var(--gray-100);border-radius:4px;padding:10px 12px}
+.kpi{
+  background:linear-gradient(180deg, var(--surface), var(--surface-warm));
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:10px 12px;
+  box-shadow:0 10px 24px rgba(23,37,66,.06);
+}
 .kpi-label{font-size:10px;color:var(--gray-500);font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
 .kpi-value{font-size:20px;font-weight:700;color:var(--gray-900);letter-spacing:-.5px;line-height:1}
 .kpi-sub{font-size:11px;margin-top:3px}
@@ -56,7 +110,17 @@ svg text{font-family:var(--font)}
 .scenario-btn.active{background:var(--white);color:var(--navy);box-shadow:0 1px 3px rgba(0,0,0,.1)}
 .scenario-btn.bull.active{color:var(--green)}
 .scenario-btn.bear.active{color:var(--red)}
-.commentary{background:var(--gray-50);border-left:3px solid var(--navy);padding:10px 12px;font-size:12px;line-height:1.6;color:var(--gray-700);font-style:italic;border-radius:0 4px 4px 0;margin-top:10px}
+.commentary{
+  background:var(--surface-soft);
+  border-left:3px solid var(--gold);
+  padding:10px 12px;
+  font-size:12px;
+  line-height:1.6;
+  color:var(--gray-700);
+  font-style:italic;
+  border-radius:0 4px 4px 0;
+  margin-top:10px;
+}
 textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var(--gray-900);background:var(--gray-50);border:1px solid var(--gray-100);border-radius:4px;padding:10px;resize:vertical;line-height:1.5}
 .gen-btn{margin-top:8px;padding:8px 16px;background:var(--navy);color:white;border:none;border-radius:4px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);transition:background .15s}
 .gen-btn:hover{background:var(--navy-light)}
@@ -73,13 +137,21 @@ textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var
 .sb{background:#EEF2FF;color:#3730A3;font-weight:600}
 .gap{margin-top:12px}
 .flex-b{display:flex;align-items:center;justify-content:space-between}
+.footer-disclaimer{
+  margin:16px 20px 20px;
+  padding-top:10px;
+  border-top:1px solid var(--gray-100);
+  font-size:10px;
+  line-height:1.5;
+  color:var(--gray-500);
+}
 </style>
 </head>
 <body>
 <div class="header">
   <div class="header-left">
-    <div class="header-logo">e<span>b</span>ay</div>
-    <div class="header-title">GMX Strategic Finance Dashboard &nbsp;·&nbsp; FP&A Automation Portfolio &nbsp;·&nbsp; As of Q1 2026A</div>
+    <div class="header-logo"><span class="logo-e">e</span><span class="logo-b">b</span><span class="logo-a">a</span><span class="logo-y">y</span></div>
+    <div class="header-title">Strategic Finance Dashboard &nbsp;·&nbsp; FP&A Automation Portfolio &nbsp;·&nbsp; As of Q1 2026A</div>
   </div>
   <div class="header-kpis">
     <div class="hkpi"><div class="hkpi-label">GMX Rev FY2025A</div><div class="hkpi-value">$8.3B <span class="delta-up">↑7.9%</span></div></div>
@@ -329,7 +401,7 @@ textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var
       <div class="card-title">Input <span>Paste variance table · pipe-delimited</span></div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <div><label style="font-size:11px;color:var(--gray-500)">Period &nbsp;</label><select id="ve-period" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>FY2025 full year</option><option>Q1 2026</option><option>Q4 2025</option></select></div>
-        <div><label style="font-size:11px;color:var(--gray-500)">Context &nbsp;</label><select id="ve-context" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>eBay GMX — COO org</option><option>eBay consolidated</option></select></div>
+        <div><label style="font-size:11px;color:var(--gray-500)">Context &nbsp;</label><select id="ve-context" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>eBay GMX — CXX org</option><option>eBay consolidated</option></select></div>
       </div>
       <textarea id="ve-input" rows="14" placeholder="Paste variance table here..."></textarea>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
@@ -339,14 +411,14 @@ textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var
     </div>
     <div class="card">
       <div class="card-title flex-b">Generated Prompt <button class="copy-pill" onclick="copyPrompt()">Copy</button></div>
-      <div id="ve-out"><div style="color:var(--gray-500);font-size:12px;font-style:italic;margin-top:16px">Paste a variance table and click "Build prompt" — copy the result into a new Claude chat to get CFO-ready commentary in 60 seconds.</div></div>
+      <div id="ve-out"><div style="color:var(--gray-500);font-size:12px;font-style:italic;margin-top:16px">Paste a variance table and click "Build prompt" — copy the result into a new Claude chat to get Leadership-ready commentary in 60 seconds.</div></div>
     </div>
   </div>
   <div class="card gap">
     <div class="card-title">Workflow</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding-top:4px">
       <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">1</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste variance table</div><div style="font-size:11px;color:var(--gray-500)">Copy Section 3 from Budget_vs_Actuals Excel tab or any pipe-delimited table</div></div></div>
-      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">2</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Build prompt</div><div style="font-size:11px;color:var(--gray-500)">Generates a pre-engineered Claude prompt with CFO communication standards built in</div></div></div>
+      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">2</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Build prompt</div><div style="font-size:11px;color:var(--gray-500)">Generates a pre-engineered Claude prompt with Leadership communication standards built in</div></div></div>
       <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">3</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste into Claude</div><div style="font-size:11px;color:var(--gray-500)">Open Claude.ai, paste prompt — get executive summary, key variances, outlook in 60 seconds</div></div></div>
     </div>
   </div>
@@ -354,6 +426,12 @@ textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var
 
 </div>
 
+<div class="footer-disclaimer">
+  Disclaimer: This project is an independent personal portfolio case study and is not affiliated with, sponsored by, reviewed by, or endorsed by eBay Inc. eBay trademarks, names, and related references are used solely for identification and illustrative analytical purposes. 
+  Historical financial and operating data referenced in this dashboard is derived from eBay's publicly available company filings, SEC filings, earnings materials, and other public disclosures. Scenario analysis, forecasts, assumptions, allocations, and any derived numerical estimates reflect the author's independent analysis and are provided for educational and portfolio demonstration purposes only.
+</div>
+
+  
 <script>
 const S={
   base:{label:'Steady-state execution · +8% revenue · HC flat',rev:'$9.0B',revg:'+8.0% YoY',oi:'$3.0B',oig:'+17.4% YoY',hc:'450',hcg:'Flat YoY',color:'#1B2A4A',
@@ -417,7 +495,7 @@ function genPrompt(){
   if(!inp){alert('Paste a variance table first.');return;}
   const period=document.getElementById('ve-period').value;
   const ctx=document.getElementById('ve-context').value;
-  _prompt=`You are a senior FP&A director writing variance commentary for a CFO audience. Direct, number-first, no filler phrases. Fast, specific, action-oriented.\n\nPeriod: ${period}\nContext: ${ctx}\n\nVariance table:\n${inp}\n\nOutput exactly three sections:\n\nEXECUTIVE SUMMARY\n2-3 sentences. Lead with the most important number. State beat/miss at operating income level and name the single biggest driver.\n\nKEY VARIANCES (top 3 by absolute $ impact)\nOne sentence each. Format: [Line]: actual vs budget, $ and % magnitude, one-line driver. Unfavorable in parentheses.\n\nRISK & OUTLOOK\n2-3 sentences. One risk that could persist. One opportunity. Forward-looking only.`;
+  _prompt=`You are a senior FP&A director writing variance commentary for a Leadership audience. Direct, number-first, no filler phrases. Fast, specific, action-oriented.\n\nPeriod: ${period}\nContext: ${ctx}\n\nVariance table:\n${inp}\n\nOutput exactly three sections:\n\nEXECUTIVE SUMMARY\n2-3 sentences. Lead with the most important number. State beat/miss at operating income level and name the single biggest driver.\n\nKEY VARIANCES (top 3 by absolute $ impact)\nOne sentence each. Format: [Line]: actual vs budget, $ and % magnitude, one-line driver. Unfavorable in parentheses.\n\nRISK & OUTLOOK\n2-3 sentences. One risk that could persist. One opportunity. Forward-looking only.`;
   document.getElementById('ve-out').innerHTML=`<div class="output-text">${_prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
 }
 
