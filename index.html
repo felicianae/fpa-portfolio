@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felice — FP&A & Strategic Finance Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0b0e14;
+      --surface:   #121720;
+      --border:    #1e2535;
+      --border-hi: #2e3d55;
+      --text:      #c8d0de;
+      --muted:     #5a6880;
+      --white:     #eef1f7;
+      --accent:    #3a7bd5;
+      --accent-lo: rgba(58, 123, 213, 0.12);
+      --green:     #2ecc8a;
+      --amber:     #e8a94a;
+      --tag-bg:    #161d2b;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 14, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      height: 52px;
+    }
+    .nav-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 80px 2rem 64px;
+    }
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      max-width: 580px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── PROJECTS ── */
+    .projects {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 2rem 80px;
+    }
+    .section-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .project-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .project-card:hover {
+      border-color: var(--border-hi);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+    .card-inner {
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .card-number {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .card-company {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .card-desc {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      max-width: 520px;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .tag {
+      background: var(--tag-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10.5px;
+      color: var(--muted);
+      padding: 3px 9px;
+    }
+    .card-metrics {
+      display: flex;
+      gap: 24px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .metric { }
+    .metric-val {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .metric-label {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* CTA side */
+    .card-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .status-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      border-radius: 20px;
+      padding: 4px 10px;
+    }
+    .status-live {
+      background: rgba(46, 204, 138, 0.1);
+      color: var(--green);
+      border: 1px solid rgba(46, 204, 138, 0.25);
+    }
+    .status-progress {
+      background: rgba(232, 169, 74, 0.1);
+      color: var(--amber);
+      border: 1px solid rgba(232, 169, 74, 0.25);
+    }
+    .btn-launch {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 6px;
+      transition: background 0.2s, transform 0.15s;
+      white-space: nowrap;
+    }
+    .btn-launch:hover {
+      background: #2f68c0;
+      transform: translateY(-1px);
+    }
+    .btn-disabled {
+      background: var(--border);
+      color: var(--muted);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .btn-launch svg {
+      flex-shrink: 0;
+    }
+
+    /* ── SKILLS STRIP ── */
+    .skills-strip {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem 80px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--border);
+    }
+    .skill-cell {
+      background: var(--surface);
+      padding: 20px 22px;
+    }
+    .skill-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .skill-items {
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-left {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .footer-right {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .footer-right a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-right a:hover { color: var(--white); }
+
+    @media (max-width: 640px) {
+      .card-inner { grid-template-columns: 1fr; }
+      .card-cta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .card-metrics { flex-wrap: wrap; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">felice / fpa-portfolio</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="https://www.linkedin.com/in/" target="_blank">LinkedIn</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <p class="hero-eyebrow">Strategic Finance · FP&amp;A · Equity Research</p>
+    <h1>Finance systems built for<br /><em>decisions, not decoration.</em></h1>
+    <p class="hero-sub">
+      Three end-to-end projects spanning SaaS unit economics, marketplace financial modeling,
+      and TMT equity research — each with an Excel model and interactive HTML dashboard.
+      Built to demonstrate the analytical depth and systems-thinking that strategic finance roles demand.
+    </p>
+    <div class="hero-meta">
+      <span><span class="dot"></span> 2 projects live</span>
+      <span>Excel + HTML for each</span>
+      <span>Darden MBA · Amazon FP&amp;A Intern · ex-Tokocrypto CEO Office</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="projects" id="projects">
+    <p class="section-label">Projects — 2026</p>
+
+    <!-- PROJECT 1: eBay -->
+    <article class="project-card">
+      <div class="card-inner">
+        <div>
+          <p class="card-number">01</p>
+          <p class="card-company">eBay Inc. · GMX / COO Org</p>
+          <h2 class="card-title">GMX Strategic Finance System</h2>
+          <p class="card-desc">
+            Multi-tab Excel model covering GMV decomposition, take rate expansion, revenue vs. budget
+            variance (RAG), headcount planning, and three-scenario FY2026 forecast. Interactive HTML
+            dashboard with rolling actuals, sensitivity tables, and an AI-prompt variance engine.
+          </p>
+          <div class="card-tags">
+            <span class="tag">GMV Modeling</span>
+            <span class="tag">Take Rate Analysis</span>
+            <span class="tag">Variance Engine</span>
+            <span class="tag">HC Planning</span>
+            <span class="tag">3-Scenario Forecast</span>
+            <span class="tag">Excel + HTML</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric">
+              <div class="metric-val">$79.6B</div>
+              <div class="metric-label">GMV modeled</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val">$10M+</div>
+              <div class="metric-label">Variance identified (Amazon internship)</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val">3</div>
+              <div class="metric-label">Scenarios (Base / Bull / Bear)</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <span class="status-badge status-live">● Live</span>
+          <a class="btn-launch" href="https://simbazone.github.io/fpa-portfolio/ebay_dashboard.html" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Launch Dashboard
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 2: HubSpot -->
+    <article class="project-card">
+      <div class="card-inner">
+        <div>
+          <p class="card-number">02</p>
+          <p class="card-company">HubSpot Inc. · HUBS</p>
+          <h2 class="card-title">SaaS Strategic Finance System</h2>
+          <p class="card-desc">
+            Full SaaS finance stack: ARR waterfall (logo churn → gross retention → expansion → new logos),
+            unit economics (CAC payback, LTV/CAC, NRR by cohort), SMB vs. upmarket segmentation,
+            PLG vs. field sales contribution, and Rule of 40 tracking. Bear/base/bull scenario model
+            with implied EV output.
+          </p>
+          <div class="card-tags">
+            <span class="tag">ARR Waterfall</span>
+            <span class="tag">NRR / GRR</span>
+            <span class="tag">CAC · LTV</span>
+            <span class="tag">Rule of 40</span>
+            <span class="tag">Scenario Analysis</span>
+            <span class="tag">Excel + HTML</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric">
+              <div class="metric-val">4 tabs</div>
+              <div class="metric-label">Overview · ARR · Unit Econ · Scenarios</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val">FY21–25A</div>
+              <div class="metric-label">Historical + FY26E forecast</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val">EV</div>
+              <div class="metric-label">Implied valuation output</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <span class="status-badge status-live">● Live</span>
+          <a class="btn-launch" href="https://simbazone.github.io/fpa-portfolio/hubs_dashboard.html" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Launch Dashboard
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- PROJECT 3: Cloudflare -->
+    <article class="project-card">
+      <div class="card-inner">
+        <div>
+          <p class="card-number">03</p>
+          <p class="card-company">Cloudflare Inc. · NET</p>
+          <h2 class="card-title">TMT Equity Research Package</h2>
+          <p class="card-desc">
+            Institutional-grade equity research on Cloudflare: verified three-statement financial model,
+            SaaS metrics model (DBNER, cohort analysis, ARR build), DCF and comparable company valuation,
+            and a full written research note. Covers the AI-native infrastructure thesis and competitive
+            positioning vs. Fastly, Zscaler, and hyperscalers.
+          </p>
+          <div class="card-tags">
+            <span class="tag">3-Statement Model</span>
+            <span class="tag">DCF Valuation</span>
+            <span class="tag">SaaS Metrics</span>
+            <span class="tag">Comps</span>
+            <span class="tag">Research Note</span>
+            <span class="tag">TMT</span>
+          </div>
+          <div class="card-metrics">
+            <div class="metric">
+              <div class="metric-val">NET</div>
+              <div class="metric-label">NYSE · $~35B mkt cap</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val">In progress</div>
+              <div class="metric-label">Model complete · Dashboard pending</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-cta">
+          <span class="status-badge status-progress">◐ In Progress</span>
+          <a class="btn-launch" href="https://simbazone.github.io/fpa-portfolio/Cloudflare_Dashboard.html" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Launch Dashboard
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="skills-strip">
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <p class="skill-label">Modeling</p>
+        <p class="skill-items">Excel / VBA · Python · SQL<br />3-statement · DCF · ARR waterfall<br />Scenario & sensitivity</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-label">Visualization</p>
+        <p class="skill-items">HTML / CSS / JS dashboards<br />Power BI · Tableau · Domo<br />Executive-ready reporting</p>
+      </div>
+      <div class="skill-cell">
+        <p class="skill-label">Domain</p>
+        <p class="skill-items">SaaS unit economics · FP&amp;A<br />Marketplace GMV dynamics<br />TMT equity research</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p class="footer-left">felice · darden mba '26 · strategic finance</p>
+    <div class="footer-right">
+      <a href="https://github.com/simbazone/fpa-portfolio" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+</body>
+</html>
