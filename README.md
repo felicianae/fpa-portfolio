@@ -1,46 +1,65 @@
-# FP&A Automation Portfolio
+# FP&A & Strategic Finance Portfolio
 
-**Live dashboard:** [simbazone.github.io/fpa-portfolio](https://simbazone.github.io/fpa-portfolio)
+**Live portfolio:** [simbazone.github.io/fpa-portfolio](https://simbazone.github.io/fpa-portfolio)
 
----
-
-## What This Is
-
-An end-to-end FP&A automation system built on eBay's public financial data,
-replicating the FP&A workflow. Built as a portfolio project using Claude Cowork.
+Three end-to-end finance systems built independently to demonstrate FP&A modeling, 
+SaaS unit economics, and equity research — each with an Excel model and an 
+interactive HTML dashboard.
 
 ---
 
-## What's Built
-1. Excel Models (Claude Cowork automation)
-2. Interactive Dashboard (this repo)
-- **Overview** — Revenue trend, take rate story, Budget vs Actuals RAG, HC summary
-- **Scenario Analysis** — Live BASE/BULL/BEAR toggle across KPIs, forecast, sensitivities
-- **Variance Engine** — Paste variance table → generate commentary Claude prompt in 1 click
+## Projects
+
+### 01 · eBay GMX — Strategic Finance System
+**[Launch Dashboard →](https://simbazone.github.io/fpa-portfolio/ebay_dashboard.html)**
+
+A mock FP&A system for eBay's GMX (Marketplace) COO org — modeled as a 450-person 
+business unit representing ~75% of consolidated revenue.
+
+- Multi-tab Excel model: GMV decomposition, take rate expansion, revenue vs. budget 
+  variance (RAG), headcount planning, 3-scenario FY2026 forecast
+- Interactive dashboard with rolling actuals, sensitivity tables, and an AI-powered 
+  variance commentary engine that generates CFO-ready narrative from any 
+  budget vs. actuals table in under 60 seconds
 
 ---
 
-## Key Findings
+### 02 · HubSpot (HUBS) — SaaS Strategic Finance System
+**[Launch Dashboard →](https://simbazone.github.io/fpa-portfolio/hubs_dashboard.html)**
 
-- Revenue is a take rate story: GMV down 9% peak-to-trough, revenue up 25% same period (10.2% → 13.9% take rate)
-- FY2025 dual inflection: first year since FY2020 where both GMV and take rate grew simultaneously
-- G&A overage explains everything: $354M revenue beat flipped to $323M op income miss by a single $467M G&A line
-- FCF compression is balance-sheet funded: $2.5B buybacks funded via net debt expansion $3.2B → $3.8B
+Full SaaS finance stack built on publicly available 10-K and earnings data 
+(FY2021A–FY2025A, FY2026E–FY2027E forecast).
+
+- ARR waterfall: logo churn → gross retention → expansion → new logos
+- Unit economics: CAC payback, LTV:CAC, NRR by cohort, PLG vs. field sales split
+- SMB vs. upmarket segmentation, Rule of 40 tracking, bear/base/bull scenario model 
+  with implied EV output
+
+---
+
+### 03 · Cloudflare (NET) — TMT Equity Research
+**[Launch Dashboard →](https://simbazone.github.io/fpa-portfolio/Cloudflare_Dashboard.html)**
+
+Institutional-grade initiating coverage report. BUY · $200 price target · June 2026.
+
+- Verified 3-statement model, SaaS metrics (DBNER, NRR recovery, large customer 
+  cohorts), DCF and comparable company valuation (6-peer set)
+- Investment thesis centered on AI/agentic infrastructure positioning, NRR recovery 
+  from 111% trough to 120%, and Rule of 40 expansion toward 50%+
+- Full CFO and CEO commentary synthesis from Q1 2026 earnings and Investor Day
 
 ---
 
 ## Stack
-Claude Desktop (Cowork) · Claude API · Excel/openpyxl · Vanilla HTML/JS · GitHub Pages
 
-## Data Sources
-eBay SEC filings (10-K FY2022–FY2025), Q1 2026 Earnings Deck, 2026 Proxy Statement,
-eBay Investor Relations historical tables. All public disclosures.
-
----
-
-## Disclaimer: 
-
-Independent portfolio project built from public information.
-GMX financials are modeled estimates, eBay does not disclose GMX as a separate segment. Not affiliated with or endorsed by eBay Inc. All data sourced exclusively from publicly available SEC filings and eBay investor relations disclosures. No proprietary or non-public information was used.
+| Layer | Tools |
+|---|---|
+| Modeling | Excel (multi-tab, scenario, sensitivity) |
+| Visualization | HTML · CSS · JavaScript (no frameworks) |
+| Research | SEC 10-K/10-Q · Earnings transcripts · Investor Days |
+| Automation | Prompt engineering · AI-assisted variance commentary |
 
 ---
+
+*All data sourced from public filings. Not affiliated with eBay, HubSpot, or 
+Cloudflare. Not investment advice.*
