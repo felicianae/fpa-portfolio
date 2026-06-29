@@ -11,7 +11,7 @@ interactive HTML dashboard.
 ## Projects
 
 ### 01 · eBay GMX — Strategic Finance System
-**[Launch Dashboard →](https://simbazone.github.io/fpa-portfolio/ebay_dashboard.html)**
+**[Launch Dashboard →](https://felicianae.github.io/fpa-portfolio/ebay_dashboard.html)**
 
 A mock FP&A system for eBay's GMX (Marketplace) COO org — modeled as a 450-person 
 business unit representing ~75% of consolidated revenue.
