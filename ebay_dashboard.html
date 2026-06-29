@@ -151,7 +151,10 @@ textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var
 <div class="header">
   <div class="header-left">
     <div class="header-logo"><span class="logo-e">e</span><span class="logo-b">b</span><span class="logo-a">a</span><span class="logo-y">y</span></div>
-    <div class="header-title">Strategic Finance Dashboard &nbsp;·&nbsp; FP&A Automation Portfolio &nbsp;·&nbsp; As of Q1 2026A</div>
+    <div>
+      <div class="header-title">Strategic Finance Dashboard &nbsp;·&nbsp; FP&A Automation Portfolio &nbsp;·&nbsp; As of Q1 2026A</div>
+      <div style="font-size:10px;color:rgba(255,255,255,0.42);margin-top:2px;padding-left:17px">GMX = eBay Marketplace (~75% of consolidated revenue) &nbsp;·&nbsp; Mock FP&A system built for a 450-person COO org &nbsp;·&nbsp; All figures derived from public SEC filings</div>
+    </div>
   </div>
   <div class="header-kpis">
     <div class="hkpi"><div class="hkpi-label">GMX Rev FY2025A</div><div class="hkpi-value">$8.3B <span class="delta-up">↑7.9%</span></div></div>
@@ -281,6 +284,51 @@ textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var
         <div class="commentary">FY2025 revenue beat budget by $354M (+3.3%), driven by take rate expansion to 13.9% and GMV recovery to $79.6B — the first dual acceleration since FY2020. Operating income missed by $323M, entirely attributable to a $467M G&A overage from one-time tax and legal settlements. FCF compressed 24% YoY, funded via net debt expansion ($3.2B→$3.8B) alongside $2.5B in buybacks.</div>
       </div>
       <div class="card gap">
+        <div class="card-title">FCF Bridge FY2024→FY2025 <span>$mm · waterfall</span></div>
+        <svg viewBox="0 0 340 130" xmlns="http://www.w3.org/2000/svg">
+          <!-- Baseline grid -->
+          <line x1="10" y1="20" x2="330" y2="20" stroke="#EAECF0" stroke-width="0.5"/>
+          <line x1="10" y1="55" x2="330" y2="55" stroke="#EAECF0" stroke-width="0.5"/>
+          <line x1="10" y1="90" x2="330" y2="90" stroke="#EAECF0" stroke-width="0.5"/>
+          <text x="8" y="24" text-anchor="end" font-size="8" fill="#9CA3AF">$2.0B</text>
+          <text x="8" y="59" text-anchor="end" font-size="8" fill="#9CA3AF">$1.7B</text>
+          <text x="8" y="94" text-anchor="end" font-size="8" fill="#9CA3AF">$1.4B</text>
+          <!-- FY2024 FCF $1,956M — bar from ~y=25 height=65 -->
+          <rect x="18" y="22" width="38" height="68" fill="#1B2A4A" rx="1" opacity="0.85"/>
+          <text x="37" y="18" text-anchor="middle" font-size="8" fill="#1B2A4A" font-weight="600">$1,956</text>
+          <text x="37" y="118" text-anchor="middle" font-size="8" fill="#6B7280">FY24 FCF</text>
+          <!-- Op CF improvement +$163M (green, from top of FY24) -->
+          <rect x="70" y="18" width="38" height="12" fill="#178A4D" rx="1" opacity="0.8"/>
+          <text x="89" y="14" text-anchor="middle" font-size="7.5" fill="#178A4D" font-weight="600">+163</text>
+          <text x="89" y="118" text-anchor="middle" font-size="7.5" fill="#6B7280">Op CF</text>
+          <!-- WC swing −$1,429M (red, large) -->
+          <rect x="122" y="22" width="38" height="48" fill="#D14343" rx="1" opacity="0.85"/>
+          <text x="141" y="18" text-anchor="middle" font-size="7.5" fill="#D14343" font-weight="600">(1,429)</text>
+          <text x="141" y="118" text-anchor="middle" font-size="7.5" fill="#6B7280">WC swing</text>
+          <!-- CapEx +$12M (slight negative = slightly red) -->
+          <rect x="174" y="22" width="38" height="6" fill="#D14343" rx="1" opacity="0.6"/>
+          <text x="193" y="18" text-anchor="middle" font-size="7.5" fill="#D14343" font-weight="600">(12)</text>
+          <text x="193" y="118" text-anchor="middle" font-size="7.5" fill="#6B7280">CapEx</text>
+          <!-- Other/Tax +$806 timing (green) -->
+          <rect x="226" y="14" width="38" height="26" fill="#178A4D" rx="1" opacity="0.6"/>
+          <text x="245" y="10" text-anchor="middle" font-size="7.5" fill="#178A4D" font-weight="600">+806</text>
+          <text x="245" y="118" text-anchor="middle" font-size="7.5" fill="#6B7280">Tax/Other</text>
+          <!-- FY2025 FCF $1,484M -->
+          <rect x="280" y="42" width="38" height="48" fill="#C8002A" rx="1" opacity="0.85"/>
+          <text x="299" y="38" text-anchor="middle" font-size="8" fill="#C8002A" font-weight="600">$1,484</text>
+          <text x="299" y="118" text-anchor="middle" font-size="7.5" fill="#C8002A" font-weight="600">FY25 FCF</text>
+          <!-- Connector line -->
+          <line x1="56" y1="55" x2="70" y2="55" stroke="#D1C7B7" stroke-width="0.75" stroke-dasharray="2,2"/>
+          <line x1="108" y1="55" x2="122" y2="55" stroke="#D1C7B7" stroke-width="0.75" stroke-dasharray="2,2"/>
+          <line x1="160" y1="55" x2="174" y2="55" stroke="#D1C7B7" stroke-width="0.75" stroke-dasharray="2,2"/>
+          <line x1="212" y1="55" x2="226" y2="55" stroke="#D1C7B7" stroke-width="0.75" stroke-dasharray="2,2"/>
+          <line x1="264" y1="55" x2="280" y2="55" stroke="#D1C7B7" stroke-width="0.75" stroke-dasharray="2,2"/>
+        </svg>
+        <div style="font-size:10px;color:var(--gray-500);line-height:1.55;margin-top:2px">
+          FCF compressed ($472M) YoY despite Op CF improvement. The $1.4B working capital swing was structural — accounts payable timing shifted as eBay settled vendor agreements. Tax/other benefit partially offset. Meanwhile $2.5B buybacks were funded via net debt expansion ($3.2B→$3.8B). FCF quality is recovering in Q1 2026.
+        </div>
+      </div>
+      <div class="card gap">
         <div class="card-title">HC Model Summary <span>GMX mock org · 450 HC · 1.51x loaded</span></div>
         <table class="data-table">
           <thead><tr><th>Function</th><th>HC</th><th>Loaded $mm</th><th>$/Head $K</th></tr></thead>
@@ -396,30 +444,85 @@ textarea{width:100%;font-family:'Courier New',monospace;font-size:11px;color:var
 
 <!-- VARIANCE ENGINE -->
 <div class="panel" id="panel-variance">
+
+  <!-- EXPLAINER BANNER -->
+  <div class="card" style="margin-bottom:16px;background:var(--navy);border:none">
+    <div style="display:grid;grid-template-columns:1fr auto;gap:16px;align-items:start">
+      <div>
+        <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:8px">What is this?</div>
+        <div style="font-size:14px;font-weight:600;color:#fff;margin-bottom:6px">AI-Powered Variance Commentary Engine</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.7;max-width:680px;margin-bottom:14px">
+          In a real FP&A role, writing variance commentary — the narrative that explains why actuals beat or missed budget — is one of the most time-consuming parts of month-end close. A finance team spends hours turning a spreadsheet of numbers into executive-ready prose. This engine automates that: paste any budget vs. actuals table, set your audience, and get CFO-ready commentary in 60 seconds.
+        </div>
+        <button onclick="loadSample()" style="display:inline-flex;align-items:center;gap:8px;background:#2ecc8a;color:#0b1a12;border:none;border-radius:6px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s;letter-spacing:0.01em" onmouseover="this.style.background='#27b87a'" onmouseout="this.style.background='#2ecc8a'">
+          ▶ &nbsp;Run Live Demo — eBay FY2025 Actuals
+        </button>
+        <div style="font-size:10.5px;color:rgba(255,255,255,0.4);margin-top:8px">Loads sample data · builds prompt · shows AI commentary output — all in one click</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;min-width:120px;align-items:flex-end">
+        <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 14px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#fff">60s</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px">Time to commentary</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:10px 14px;text-align:center">
+          <div style="font-size:18px;font-weight:700;color:#fff">3</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px">Audience modes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="grid-2-eq">
     <div class="card">
-      <div class="card-title">Input <span>Paste variance table · pipe-delimited</span></div>
+      <div class="card-title">Input <span>Paste variance table · pipe-delimited or tab-separated</span></div>
       <div style="margin-bottom:8px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
         <div><label style="font-size:11px;color:var(--gray-500)">Period &nbsp;</label><select id="ve-period" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>FY2025 full year</option><option>Q1 2026</option><option>Q4 2025</option></select></div>
-        <div><label style="font-size:11px;color:var(--gray-500)">Context &nbsp;</label><select id="ve-context" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>eBay GMX — CXX org</option><option>eBay consolidated</option></select></div>
+        <div><label style="font-size:11px;color:var(--gray-500)">Context &nbsp;</label><select id="ve-context" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>eBay GMX — COO org</option><option>eBay consolidated</option></select></div>
+        <div><label style="font-size:11px;color:var(--gray-500)">Audience &nbsp;</label><select id="ve-audience" style="font-size:11px;padding:3px 6px;border:1px solid var(--gray-100);border-radius:3px"><option>CFO / Leadership</option><option>Finance Director</option><option>Board deck</option></select></div>
       </div>
-      <textarea id="ve-input" rows="14" placeholder="Paste variance table here..."></textarea>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">
-        <span class="sample-link" onclick="loadSample()">↓ Load eBay FY2025 actuals</span>
+      <div style="font-size:10px;color:var(--gray-500);background:var(--gray-50);border:1px solid var(--gray-100);border-radius:3px;padding:6px 8px;margin-bottom:6px;line-height:1.6">
+        <strong style="color:var(--gray-700)">Expected format:</strong> &nbsp;Metric | Budget | Actual | Var $ | Var % | RAG<br>
+        Accepts pipe ( | ) or tab-delimited. Header row optional. RAG column optional (G/R/A or GREEN/RED/AMBER).
+      </div>
+      <textarea id="ve-input" rows="12" placeholder="Paste variance table here...&#10;&#10;Example:&#10;Net Revenue | 10,746 | 11,100 | 354 | 3.3% | GREEN&#10;G&amp;A | 923 | 1,390 | (467) | (50.6%) | RED&#10;Op Income | 2,581 | 2,258 | (323) | (12.5%) | RED"></textarea>
+      <div style="display:flex;align-items:center;justify-content:flex-end;margin-top:6px">
         <button class="gen-btn" onclick="genPrompt()">Build prompt ↗</button>
       </div>
     </div>
     <div class="card">
-      <div class="card-title flex-b">Generated Prompt <button class="copy-pill" onclick="copyPrompt()">Copy</button></div>
-      <div id="ve-out"><div style="color:var(--gray-500);font-size:12px;font-style:italic;margin-top:16px">Paste a variance table and click "Build prompt" — copy the result into a new Claude chat to get Leadership-ready commentary in 60 seconds.</div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <div class="card-title" style="margin-bottom:0">Output <span id="ve-out-mode">· Load demo to see a live example</span></div>
+        <div style="display:flex;gap:6px">
+          <button class="copy-pill" id="btn-show-prompt" onclick="showMode('prompt')" style="display:none">Prompt</button>
+          <button class="copy-pill" id="btn-show-commentary" onclick="showMode('commentary')" style="display:none;background:var(--navy);color:#fff">Commentary</button>
+          <button class="copy-pill" onclick="copyOutput()">Copy</button>
+        </div>
+      </div>
+      <div id="ve-out">
+        <div style="color:var(--gray-500);font-size:12px;font-style:italic;margin-top:16px">Hit <strong>▶ Run Live Demo</strong> in the banner above to see the engine in action — or paste your own variance table and click <strong>Build prompt</strong>.</div>
+      </div>
     </div>
   </div>
-  <div class="card gap">
-    <div class="card-title">Workflow</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;padding-top:4px">
-      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">1</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste variance table</div><div style="font-size:11px;color:var(--gray-500)">Copy Section 3 from Budget_vs_Actuals Excel tab or any pipe-delimited table</div></div></div>
-      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">2</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Build prompt</div><div style="font-size:11px;color:var(--gray-500)">Generates a pre-engineered Claude prompt with Leadership communication standards built in</div></div></div>
-      <div style="display:flex;gap:10px"><div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">3</div><div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste into Claude</div><div style="font-size:11px;color:var(--gray-500)">Open Claude.ai, paste prompt — get executive summary, key variances, outlook in 60 seconds</div></div></div>
+
+  <div class="card gap" style="margin-top:16px">
+    <div class="card-title">How it works</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;padding-top:4px">
+      <div style="display:flex;gap:10px">
+        <div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">1</div>
+        <div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Paste variance table</div><div style="font-size:11px;color:var(--gray-500)">Any Budget vs. Actuals table — pipe or tab-delimited. Pulled directly from Excel close package.</div></div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">2</div>
+        <div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Set audience</div><div style="font-size:11px;color:var(--gray-500)">CFO = terse, number-first. Finance Director = root cause per line. Board = no jargon, forward-looking.</div></div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">3</div>
+        <div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Build &amp; paste prompt</div><div style="font-size:11px;color:var(--gray-500)">Engine injects RED-flagged rows as priority misses and embeds FP&A communication rules into the prompt.</div></div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <div style="width:20px;height:20px;min-width:20px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:10px;font-weight:600">4</div>
+        <div><div style="font-size:12px;font-weight:500;margin-bottom:3px">Get commentary</div><div style="font-size:11px;color:var(--gray-500)">Paste into Claude → structured Executive Summary, Key Variances, and Risk &amp; Outlook in 60 seconds.</div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -463,7 +566,7 @@ function setSc(k){
   document.getElementById('sc-revg').textContent=s.revg;document.getElementById('sc-revg').style.color=s.color;
   document.getElementById('sc-oig').textContent=s.oig;
   document.getElementById('sc-hcg').textContent=s.hcg;document.getElementById('sc-hcg').style.color=k==='bear'?'var(--red)':k==='bull'?'var(--green)':'var(--gray-500)';
-  document.getElementById('sc-tbody').innerHTML=s.rows.map((r,i)=>`<tr class="${i===6?'total':''}" ><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="${r[4]==='pos'?'pos':r[4]==='neg'?'neg':''}">${r[3]}</td></tr>`).join('');
+  document.getElementById('sc-tbody').innerHTML=s.rows.map((r,i)=>`<tr class="${i===6?'total':''}" ><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td class="${r[4]==='pos'?'pos':r[4]==='neg'?'neg':''}" style="font-weight:${i===6?'600':'400'}">${r[3]}</td></tr>`).join('');
   document.getElementById('sc-comm').textContent=s.comm;
   document.getElementById('rf-label').textContent=s.rfl;
   const c=s.color,op=k==='base'?'0.65':'0.8';
@@ -474,6 +577,7 @@ function setSc(k){
 }
 
 setSc('base');
+window.addEventListener('DOMContentLoaded', function() { setSc('base'); });
 
 const SAMPLE=`Metric | Budget ($mm) | Actual ($mm) | Var $ | Var % | RAG
 Net Revenues | 10,746 | 11,100 | 354 | 3.3% | GREEN
@@ -487,21 +591,154 @@ Operating Margin % | 24.0% | 20.3% | (3.7%) | — | RED
 CapEx | 350 | 392 | (42) | (12.0%) | RED
 Free Cash Flow | 1,981 | 1,484 | (497) | (25.1%) | RED`;
 
-function loadSample(){document.getElementById('ve-input').value=SAMPLE;}
+const DEMO_COMMENTARY = `<div style="font-family:inherit">
+  <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1B2A4A;border-bottom:2px solid #1B2A4A;padding-bottom:4px;margin-bottom:10px">Executive Summary</div>
+  <p style="font-size:12.5px;line-height:1.75;color:#1a1a2e;margin-bottom:14px">
+    Operating income missed budget by ($323M) / (12.5%), driven entirely by a ($467M) G&A overrun from one-time tax and legal settlements — without which op margin would have been 24.0%, on-plan. Revenue beat by +$354M (+3.3%), powered by take rate expansion to 13.9% and GMV recovery to $79.6B, the first dual acceleration since FY2020. The G&A settlement is non-recurring; FY2026 G&A should normalize to sub-$500M absent new litigation, but FCF remains constrained near-term given net debt expansion to $3.8B.
+  </p>
+
+  <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1B2A4A;border-bottom:2px solid #1B2A4A;padding-bottom:4px;margin-bottom:10px">Key Variances</div>
+  <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+    <div style="background:#FEF2F2;border-left:3px solid #C8002A;border-radius:0 4px 4px 0;padding:8px 12px">
+      <div style="font-size:11px;font-weight:700;color:#C8002A;margin-bottom:3px">① G&A — ($467M) unfavorable · Actual $1,390M vs Budget $923M</div>
+      <div style="font-size:11.5px;color:#4a1a1a;line-height:1.6">One-time tax settlement ($312M) and legal reserve build ($155M) drove a (50.6%) overrun. Neither item was in the operating plan. Exclude for comparability; recurring G&A run-rate is ~$480M, in-line with prior year.</div>
+    </div>
+    <div style="background:#FEF2F2;border-left:3px solid #C8002A;border-radius:0 4px 4px 0;padding:8px 12px">
+      <div style="font-size:11px;font-weight:700;color:#C8002A;margin-bottom:3px">② Free Cash Flow — ($497M) unfavorable · Actual $1,484M vs Budget $1,981M</div>
+      <div style="font-size:11.5px;color:#4a1a1a;line-height:1.6">FCF shortfall is a direct flow-through of the G&A overrun plus CapEx overage of ($42M). Operating cash conversion was otherwise healthy; working capital was neutral. $2.5B buyback program funded via net debt expansion ($3.2B → $3.8B).</div>
+    </div>
+    <div style="background:#F0FDF4;border-left:3px solid #1E6B3C;border-radius:0 4px 4px 0;padding:8px 12px">
+      <div style="font-size:11px;font-weight:700;color:#1E6B3C;margin-bottom:3px">③ Net Revenues — +$354M favorable · Actual $11,100M vs Budget $10,746M</div>
+      <div style="font-size:11.5px;color:#1a3a1a;line-height:1.6">Beat driven by GMV recovery to $79.6B (+6.6% YoY) and take rate of 13.9% (+10bps vs plan). Focus categories and promoted listings contributed incrementally; C2C volume stabilized following the Tise integration in H2.</div>
+    </div>
+  </div>
+
+  <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1B2A4A;border-bottom:2px solid #1B2A4A;padding-bottom:4px;margin-bottom:10px">Risk &amp; Outlook</div>
+  <p style="font-size:12.5px;line-height:1.75;color:#1a1a2e;margin-bottom:0">
+    Primary risk: if ongoing litigation reserves require additional builds in FY2026, G&A normalization thesis breaks and FCF guidance of ~$2.0B becomes at risk — watch Q1 legal accruals. Primary offset: S&M ran ($75M) unfavorable in FY2025, but the take rate trajectory at 13.9% suggests marketing ROI is intact; if GMV sustains +6% into FY2026, revenue leverage should more than absorb a flat-to-modest S&M reinvestment.
+  </p>
+  <div style="margin-top:12px;padding:8px 10px;background:#F8F9FC;border:1px solid #E5E7EB;border-radius:4px;font-size:10px;color:#6B7280;font-style:italic">
+    ✦ Generated by AI Variance Engine · eBay GMX FY2025 · CFO / Leadership audience · Prompt engineered with FP&amp;A communication standards
+  </div>
+</div>`;
 
 let _prompt='';
-function genPrompt(){
-  const inp=document.getElementById('ve-input').value.trim();
-  if(!inp){alert('Paste a variance table first.');return;}
-  const period=document.getElementById('ve-period').value;
-  const ctx=document.getElementById('ve-context').value;
-  _prompt=`You are a senior FP&A director writing variance commentary for a Leadership audience. Direct, number-first, no filler phrases. Fast, specific, action-oriented.\n\nPeriod: ${period}\nContext: ${ctx}\n\nVariance table:\n${inp}\n\nOutput exactly three sections:\n\nEXECUTIVE SUMMARY\n2-3 sentences. Lead with the most important number. State beat/miss at operating income level and name the single biggest driver.\n\nKEY VARIANCES (top 3 by absolute $ impact)\nOne sentence each. Format: [Line]: actual vs budget, $ and % magnitude, one-line driver. Unfavorable in parentheses.\n\nRISK & OUTLOOK\n2-3 sentences. One risk that could persist. One opportunity. Forward-looking only.`;
-  document.getElementById('ve-out').innerHTML=`<div class="output-text">${_prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
+let _currentMode = '';
+
+function loadSample(){
+  document.getElementById('ve-input').value = SAMPLE;
+  // Auto-build and show demo output
+  buildPromptInternal();
+  showDemoOutput();
 }
 
-function copyPrompt(){
-  if(!_prompt){alert('Build the prompt first.');return;}
-  navigator.clipboard.writeText(_prompt).then(()=>{const b=document.querySelector('.copy-pill');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',2000);});
+function showDemoOutput(){
+  document.getElementById('ve-out-mode').textContent = '· Toggle between the generated prompt and AI commentary output';
+  document.getElementById('btn-show-prompt').style.display = 'inline-block';
+  document.getElementById('btn-show-commentary').style.display = 'inline-block';
+  showMode('commentary');
+}
+
+function showMode(mode){
+  _currentMode = mode;
+  const promptBtn = document.getElementById('btn-show-prompt');
+  const commBtn = document.getElementById('btn-show-commentary');
+  if(mode === 'commentary'){
+    document.getElementById('ve-out').innerHTML = DEMO_COMMENTARY;
+    promptBtn.style.background = '';
+    promptBtn.style.color = '';
+    commBtn.style.background = 'var(--navy)';
+    commBtn.style.color = '#fff';
+  } else {
+    document.getElementById('ve-out').innerHTML = `<div class="output-text">${_prompt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
+    promptBtn.style.background = 'var(--navy)';
+    promptBtn.style.color = '#fff';
+    commBtn.style.background = '';
+    commBtn.style.color = '';
+  }
+}
+
+function buildPromptInternal(){
+  const inp = document.getElementById('ve-input').value.trim();
+  if(!inp) return;
+  const period = document.getElementById('ve-period').value;
+  const ctx = document.getElementById('ve-context').value;
+  const audience = document.getElementById('ve-audience').value;
+
+  const lines = inp.split('\n').filter(l=>l.trim() && !l.toLowerCase().startsWith('metric'));
+  const redRows=[], greenRows=[];
+  lines.forEach(line=>{
+    const parts = line.split(/\||\t/).map(s=>s.trim());
+    if(parts.length<3) return;
+    const rag = (parts[5]||parts[4]||'').toUpperCase();
+    const metric = parts[0];
+    const varPct = parts[4]||parts[3]||'';
+    if(rag.includes('R') || rag.includes('RED')) redRows.push(`${metric} (${varPct})`);
+    else if(rag.includes('G') || rag.includes('GREEN')) greenRows.push(`${metric} (${varPct})`);
+  });
+
+  const missLine = redRows.length ? `Key misses flagged RED: ${redRows.slice(0,3).join('; ')}.` : '';
+  const beatLine = greenRows.length ? `Key beats flagged GREEN: ${greenRows.slice(0,2).join('; ')}.` : '';
+
+  const audienceInstr = {
+    'CFO / Leadership': 'Write for a CFO audience. Be terse. No softening language. If it is bad news, name it directly in the first sentence.',
+    'Finance Director': 'Write for a Finance Director. Include one sentence on root cause per major variance. Operational but still crisp.',
+    'Board deck': 'Write for a Board audience. No jargon. Dollar magnitudes first, then percentage context. End with a single forward-looking sentence only.'
+  }[audience] || '';
+
+  _prompt=`You are a senior FP&A director preparing variance commentary. ${audienceInstr}
+
+RULES:
+- Lead every section with the most important number, not a preamble
+- Unfavorable variances in parentheses (e.g. ($467M))
+- No filler phrases: "it is worth noting", "importantly", "it should be highlighted"
+- Actuals vs budget framing throughout — not vs prior year unless asked
+- Three sections only, in this exact order
+
+CONTEXT:
+Period: ${period}
+Business unit: ${ctx}
+${missLine}
+${beatLine}
+
+VARIANCE TABLE:
+${inp}
+
+─────────────────────────────────────────
+OUTPUT FORMAT — use exactly these headers:
+
+EXECUTIVE SUMMARY
+[2–3 sentences. Sentence 1: operating income result and single biggest driver in $ terms. Sentence 2: revenue beat/miss context. Sentence 3: one forward-looking implication only.]
+
+KEY VARIANCES  (top 3 by absolute $ impact, unfavorable first)
+1. [Line item]: Actual $X vs Budget $Y — ($Z) unfavorable / +$Z favorable. [One-line driver. No hedge words.]
+2. [Line item]: same format
+3. [Line item]: same format
+
+RISK & OUTLOOK
+[2 sentences. One risk that could repeat next period. One offset or opportunity. Forward-looking only — no re-stating past variances.]
+─────────────────────────────────────────`;
+}
+
+function genPrompt(){
+  const inp = document.getElementById('ve-input').value.trim();
+  if(!inp){alert('Paste a variance table first.');return;}
+  buildPromptInternal();
+  document.getElementById('ve-out-mode').textContent = '· Prompt ready — copy and paste into Claude';
+  document.getElementById('btn-show-prompt').style.display = 'inline-block';
+  document.getElementById('btn-show-commentary').style.display = 'none';
+  showMode('prompt');
+}
+
+function copyOutput(){
+  const isDemoMode = _currentMode === 'commentary';
+  if(isDemoMode){
+    const text = `EXECUTIVE SUMMARY\nOperating income missed budget by ($323M) / (12.5%), driven entirely by a ($467M) G&A overrun from one-time tax and legal settlements. Revenue beat by +$354M (+3.3%), powered by take rate expansion to 13.9% and GMV recovery to $79.6B. The G&A settlement is non-recurring; FY2026 G&A should normalize to sub-$500M absent new litigation.\n\nKEY VARIANCES\n① G&A: Actual $1,390M vs Budget $923M — ($467M) unfavorable. One-time tax settlement ($312M) and legal reserve build ($155M).\n② Free Cash Flow: Actual $1,484M vs Budget $1,981M — ($497M) unfavorable. Direct flow-through of G&A overrun plus CapEx overage.\n③ Net Revenues: Actual $11,100M vs Budget $10,746M — +$354M favorable. GMV recovery and take rate expansion to 13.9%.\n\nRISK & OUTLOOK\nPrimary risk: additional litigation reserve builds in FY2026 would break the G&A normalization thesis and put FCF guidance at risk. Primary offset: take rate trajectory at 13.9% suggests marketing ROI is intact; if GMV sustains +6% into FY2026, revenue leverage should absorb flat-to-modest S&M reinvestment.`;
+    navigator.clipboard.writeText(text).then(()=>{const b=document.querySelector('.copy-pill:last-child');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',2000);});
+  } else {
+    if(!_prompt){alert('Build the prompt first.');return;}
+    navigator.clipboard.writeText(_prompt).then(()=>{const b=document.querySelector('.copy-pill:last-child');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',2000);});
+  }
 }
 </script>
 </body>
