@@ -3,530 +3,526 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Felice — FP&A & Strategic Finance Portfolio</title>
+  <title>Felice — Strategic Finance Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #0b0e14;
-      --surface:   #121720;
-      --border:    #1e2535;
-      --border-hi: #2e3d55;
-      --text:      #c8d0de;
-      --muted:     #5a6880;
-      --white:     #eef1f7;
-      --accent:    #3a7bd5;
-      --accent-lo: rgba(58, 123, 213, 0.12);
-      --green:     #2ecc8a;
-      --amber:     #e8a94a;
-      --tag-bg:    #161d2b;
+      --navy:    #192231;
+      --forest:  #404A42;
+      --gold:    #C0B283;
+      --blush:   #EDDBCD;
+      --offwhite:#F4F4F4;
+      --ink:     #192231;
+      --ink-2:   #404A42;
+      --ink-3:   #7a8070;
+      --ink-4:   #a8a89a;
+      --rule:    #ddd8d0;
+      --bg:      #faf9f7;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
-      color: var(--text);
+      color: var(--ink);
       font-family: 'Inter', system-ui, sans-serif;
-      font-size: 15px;
+      font-size: 14px;
+      font-weight: 300;
       line-height: 1.6;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ── NAV ── */
     nav {
-      position: sticky;
-      top: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
       z-index: 100;
-      background: rgba(11, 14, 20, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      background: var(--navy);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 2rem;
-      height: 52px;
+      padding: 0 52px;
+      height: 58px;
     }
     .nav-logo {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 13px;
-      color: var(--accent);
-      letter-spacing: 0.04em;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--blush);
       text-decoration: none;
+      letter-spacing: 0.02em;
     }
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
     .nav-links a {
-      font-size: 13px;
-      color: var(--text);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(237,219,205,0.55);
       text-decoration: none;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover { color: var(--blush); }
 
     /* ── HERO ── */
     .hero {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 80px 2rem 64px;
+      background: var(--navy);
+      padding: 120px 52px 90px;
     }
-    .hero-eyebrow {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.12em;
+    .hero-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 80px;
+      align-items: end;
+    }
+    .hero-left {}
+    .hero-label {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
+      color: var(--gold);
+      margin-bottom: 24px;
     }
     .hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 1.25rem;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.06;
+      color: #fff;
+      letter-spacing: -0.01em;
     }
     .hero h1 em {
       font-style: italic;
-      color: var(--accent);
+      color: var(--blush);
     }
-    .hero-sub {
-      max-width: 580px;
-      color: var(--text);
-      font-size: 15px;
-      line-height: 1.7;
-      margin-bottom: 2rem;
+    .hero-right {
+      padding-bottom: 6px;
     }
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      color: var(--muted);
+    .hero-body {
+      font-size: 14.5px;
+      font-weight: 300;
+      color: rgba(237,219,205,0.7);
+      line-height: 1.8;
+      margin-bottom: 32px;
     }
-    .hero-meta span { display: flex; align-items: center; gap: 6px; }
-    .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      display: inline-block;
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0.6;
     }
-
-    /* ── DIVIDER ── */
-    .divider {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      border-top: 1px solid var(--border);
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px 32px;
+    }
+    .hero-stat-val {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--blush);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .hero-stat-label {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(237,219,205,0.45);
     }
 
     /* ── PROJECTS ── */
     .projects {
-      max-width: 860px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 56px 2rem 80px;
+      padding: 0 52px 80px;
     }
-    .section-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--text);
-      margin-bottom: 2rem;
-    }
-
-    .project-card {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: var(--surface);
-      margin-bottom: 1.25rem;
-      overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .project-card:hover {
-      border-color: var(--border-hi);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
-    }
-    .card-inner {
-      padding: 28px 32px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1.5rem;
-      align-items: start;
-    }
-
-    .card-number {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-    .card-company {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-    .card-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .card-desc {
-      font-size: 13.5px;
-      color: var(--text);
-      line-height: 1.65;
-      margin-bottom: 16px;
-      max-width: 520px;
-    }
-    .card-tags {
+    .projects-header {
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 48px 0 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .projects-header-label {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+    .projects-header-note {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-4);
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 52px 1fr 152px;
+      gap: 0 28px;
+      align-items: start;
+      padding: 40px 0;
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.2s, padding 0.2s, margin 0.2s;
+      border-radius: 2px;
+    }
+    .project-row:hover {
+      background: var(--offwhite);
+      margin: 0 -20px;
+      padding: 40px 20px;
+    }
+
+    .proj-num {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--gold);
+      padding-top: 4px;
+    }
+    .proj-co {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin-bottom: 8px;
+    }
+    .proj-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 23px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.18;
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+    .proj-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--ink-2);
+      line-height: 1.75;
+      max-width: 520px;
       margin-bottom: 20px;
     }
-    .tag {
-      background: var(--tag-bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10.5px;
-      color: var(--text);
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj-tag {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--forest);
+      border: 1px solid rgba(64,74,66,0.3);
+      border-radius: 2px;
       padding: 3px 9px;
-    }
-    .card-metrics {
-      display: flex;
-      gap: 24px;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    .metric { }
-    .metric-val {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--white);
-    }
-    .metric-label {
-      font-size: 11px;
-      color: var(--text);
-      margin-top: 2px;
+      background: rgba(64,74,66,0.05);
     }
 
-    /* CTA side */
-    .card-cta {
+    .proj-cta {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 10px;
-      flex-shrink: 0;
+      gap: 14px;
+      padding-top: 4px;
     }
-    .status-badge {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.06em;
-      border-radius: 20px;
-      padding: 4px 10px;
+    .proj-type {
+      font-size: 10.5px;
+      font-weight: 300;
+      color: var(--ink-4);
+      text-align: right;
+      line-height: 1.85;
+      letter-spacing: 0.02em;
     }
-    .status-live {
-      background: rgba(46, 204, 138, 0.1);
-      color: var(--green);
-      border: 1px solid rgba(46, 204, 138, 0.25);
-    }
-    .status-progress {
-      background: rgba(232, 169, 74, 0.1);
-      color: var(--amber);
-      border: 1px solid rgba(232, 169, 74, 0.25);
-    }
-    .btn-launch {
+    .btn-view {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      background: var(--accent);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 500;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
       text-decoration: none;
-      padding: 9px 18px;
-      border-radius: 6px;
-      transition: background 0.2s, transform 0.15s;
+      border: 1px solid var(--navy);
+      border-radius: 2px;
+      padding: 9px 16px;
+      transition: background 0.18s, color 0.18s;
       white-space: nowrap;
     }
-    .btn-launch:hover {
-      background: #2f68c0;
-      transform: translateY(-1px);
+    .btn-view:hover {
+      background: var(--navy);
+      color: var(--blush);
     }
-    .btn-disabled {
-      background: var(--border);
-      color: var(--muted);
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-    .btn-launch svg {
-      flex-shrink: 0;
-    }
+    .btn-view svg { flex-shrink: 0; }
 
-    /* ── SKILLS STRIP ── */
-    .skills-strip {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 0 2rem 80px;
+    /* ── CAPABILITIES ── */
+    .capabilities {
+      background: var(--navy);
+      margin-top: 0;
     }
-    .skills-grid {
+    .cap-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 52px 72px;
+    }
+    .cap-label {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 44px;
+      opacity: 0.8;
+    }
+    .cap-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      background: var(--border);
+      gap: 0;
     }
-    .skill-cell {
-      background: var(--surface);
-      padding: 20px 22px;
+    .cap-col {
+      padding-right: 44px;
+      border-right: 1px solid rgba(192,178,131,0.2);
     }
-    .skill-label {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text);
-      margin-bottom: 8px;
+    .cap-col:nth-child(2) { padding-left: 44px; }
+    .cap-col:last-child { padding-left: 44px; padding-right: 0; border-right: none; }
+    .cap-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--blush);
+      margin-bottom: 14px;
     }
-    .skill-items {
+    .cap-items {
       font-size: 13px;
-      color: var(--white);
-      line-height: 1.7;
+      font-weight: 300;
+      color: rgba(237,219,205,0.6);
+      line-height: 2;
     }
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 2rem;
-      max-width: 860px;
+      background: var(--navy);
+      border-top: 1px solid rgba(192,178,131,0.2);
+    }
+    .footer-inner {
+      max-width: 960px;
       margin: 0 auto;
+      padding: 22px 52px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
     }
     .footer-left {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      color: var(--text);
-    }
-    .footer-right {
-      display: flex;
-      gap: 1.5rem;
-    }
-    .footer-right a {
+      font-family: 'EB Garamond', Georgia, serif;
       font-size: 13px;
-      color: var(--text);
-      text-decoration: none;
-      transition: color 0.2s;
+      font-style: italic;
+      color: rgba(237,219,205,0.35);
     }
-    .footer-right a:hover { color: var(--white); }
+    .footer-right { display: flex; gap: 24px; }
+    .footer-right a {
+      font-size: 10.5px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(237,219,205,0.4);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-right a:hover { color: var(--blush); }
 
-    @media (max-width: 640px) {
-      .card-inner { grid-template-columns: 1fr; }
-      .card-cta { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
-      .skills-grid { grid-template-columns: 1fr; }
-      .card-metrics { flex-wrap: wrap; gap: 16px; }
+    @media (max-width: 720px) {
+      nav { padding: 0 24px; }
+      .hero { padding: 100px 24px 64px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .projects { padding: 0 24px 56px; }
+      .project-row { grid-template-columns: 36px 1fr; }
+      .project-row:hover { margin: 0 -12px; padding: 40px 12px; }
+      .proj-cta { grid-column: 2; align-items: flex-start; margin-top: 20px; }
+      .cap-inner { padding: 48px 24px 56px; }
+      .cap-grid { grid-template-columns: 1fr; gap: 36px; }
+      .cap-col { border-right: none; border-bottom: 1px solid rgba(192,178,131,0.15); padding: 0 0 36px !important; }
+      .cap-col:last-child { border-bottom: none; padding-bottom: 0 !important; }
+      .footer-inner { padding: 22px 24px; flex-direction: column; gap: 14px; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a class="nav-logo" href="#">felice / fpa-portfolio</a>
+    <a class="nav-logo" href="#">Feliciana</a>
     <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#projects">Work</a></li>
+      <li><a href="https://github.com/felicianae/fpa-portfolio" target="_blank">GitHub</a></li>
       <li><a href="https://www.linkedin.com/in/" target="_blank">LinkedIn</a></li>
     </ul>
   </nav>
 
   <section class="hero">
-    <p class="hero-eyebrow">Strategic Finance · FP&amp;A · Equity Research</p>
-    <h1>Finance systems built for<br /><em>decisions, not decoration.</em></h1>
-    <p class="hero-sub">
-      Three end-to-end projects spanning SaaS unit economics, marketplace financial modeling,
-      and TMT equity research — each with an Excel model and interactive HTML dashboard.
-      Built to demonstrate the analytical depth and systems-thinking that strategic finance roles demand.
-    </p>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <p class="hero-label">Strategic Finance · FP&amp;A · Equity Research</p>
+        <h1>Financial systems<br />built for <em>decisions,</em><br />not decoration.</h1>
+      </div>
+      <div class="hero-right">
+        <p class="hero-body">
+          Three end-to-end finance systems spanning marketplace FP&amp;A,
+          SaaS unit economics, and TMT equity research — each built from
+          source data with a verified Excel model, interactive dashboard,
+          and AI-integrated workflow layer.
+        </p>
 
+      </div>
+    </div>
   </section>
-
-  <div class="divider"></div>
 
   <section class="projects" id="projects">
-    <p class="section-label">Projects — 2026</p>
+    <div class="projects-header">
+      <span class="projects-header-label">Selected work</span>
+      <span class="projects-header-note">2026 — independent research</span>
+    </div>
 
-    <!-- PROJECT 1: eBay -->
-    <article class="project-card">
-      <div class="card-inner">
-        <div>
-          <p class="card-number">01</p>
-          <p class="card-company">eBay Inc. · GMX / COO Org</p>
-          <h2 class="card-title">GMX Strategic Finance System</h2>
-          <p class="card-desc">
-            Multi-tab Excel model covering GMV decomposition, take rate expansion, revenue vs. budget
-            variance (RAG), headcount planning, and three-scenario FY2026 forecast. Interactive HTML
-            dashboard with rolling actuals, sensitivity tables, and an AI-prompt variance engine.
-          </p>
-          <div class="card-tags">
-            <span class="tag">GMV Modeling</span>
-            <span class="tag">Take Rate Analysis</span>
-            <span class="tag">Variance Engine</span>
-            <span class="tag">HC Planning</span>
-            <span class="tag">3-Scenario Forecast</span>
-            <span class="tag">Excel + HTML</span>
-          </div>
-          <div class="card-metrics">
-            <div class="metric">
-              <div class="metric-val">$79.6B</div>
-              <div class="metric-label">GMV modeled</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val">$10M+</div>
-              <div class="metric-label">Variance identified (Amazon internship)</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val">3</div>
-              <div class="metric-label">Scenarios (Base / Bull / Bear)</div>
-            </div>
-          </div>
-        </div>
-        <div class="card-cta">
-          <a class="btn-launch" href="https://felicianae.github.io/fpa-portfolio/ebay_dashboard.html" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Launch Dashboard
-          </a>
+    <!-- 01 eBay -->
+    <div class="project-row">
+      <div class="proj-num">01</div>
+      <div class="proj-body">
+        <p class="proj-co">eBay Inc. · GMX / COO Org</p>
+        <h2 class="proj-title">GMX Strategic Finance System</h2>
+        <p class="proj-desc">
+          FP&amp;A system for eBay's Marketplace COO org — modeled as a 450-person business unit
+          representing ~75% of consolidated revenue. Covers GMV decomposition, take rate expansion,
+          budget vs. actuals variance (RAG), headcount planning, and a three-scenario FY2026 forecast.
+          Includes an AI-powered variance engine that produces CFO-ready commentary
+          from any budget vs. actuals table in under 60 seconds.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">GMV Modeling</span>
+          <span class="proj-tag">Take Rate</span>
+          <span class="proj-tag">Variance Engine</span>
+          <span class="proj-tag">HC Planning</span>
+          <span class="proj-tag">3-Scenario</span>
+          <span class="proj-tag">AI Workflow</span>
         </div>
       </div>
-    </article>
+      <div class="proj-cta">
+        <a class="btn-view" href="https://felicianae.github.io/fpa-portfolio/ebay_dashboard.html" target="_blank">
+          View Dashboard
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
 
-    <!-- PROJECT 2: HubSpot -->
-    <article class="project-card">
-      <div class="card-inner">
-        <div>
-          <p class="card-number">02</p>
-          <p class="card-company">HubSpot Inc. · HUBS</p>
-          <h2 class="card-title">SaaS Strategic Finance System</h2>
-          <p class="card-desc">
-            Full SaaS finance stack: ARR waterfall (logo churn → gross retention → expansion → new logos),
-            unit economics (CAC payback, LTV/CAC, NRR by cohort), SMB vs. upmarket segmentation,
-            PLG vs. field sales contribution, and Rule of 40 tracking. Bear/base/bull scenario model
-            with implied EV output.
-          </p>
-          <div class="card-tags">
-            <span class="tag">ARR Waterfall</span>
-            <span class="tag">NRR / GRR</span>
-            <span class="tag">CAC · LTV</span>
-            <span class="tag">Rule of 40</span>
-            <span class="tag">Scenario Analysis</span>
-            <span class="tag">Excel + HTML</span>
-          </div>
-          <div class="card-metrics">
-            <div class="metric">
-              <div class="metric-val">4 tabs</div>
-              <div class="metric-label">Overview · ARR · Unit Econ · Scenarios</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val">FY21–25A</div>
-              <div class="metric-label">Historical + FY26E forecast</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val">EV</div>
-              <div class="metric-label">Implied valuation output</div>
-            </div>
-          </div>
-        </div>
-        <div class="card-cta">
-          <a class="btn-launch" href="https://felicianae.github.io/fpa-portfolio/hubs_dashboard.html" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Launch Dashboard
-          </a>
+    <!-- 02 HubSpot -->
+    <div class="project-row">
+      <div class="proj-num">02</div>
+      <div class="proj-body">
+        <p class="proj-co">HubSpot Inc. · HUBS · NYSE</p>
+        <h2 class="proj-title">SaaS Strategic Finance System</h2>
+        <p class="proj-desc">
+          Full SaaS finance stack built on verified public filings (FY2021A–FY2025A, FY2026E–FY2027E).
+          ARR waterfall from logo churn through expansion to new logo build, unit economics
+          by segment (CAC payback, LTV:CAC, NRR cohort), PLG vs. field sales decomposition,
+          and Rule of 40 tracking. Bear / base / bull scenario model with implied EV output.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">ARR Waterfall</span>
+          <span class="proj-tag">NRR / GRR</span>
+          <span class="proj-tag">CAC · LTV</span>
+          <span class="proj-tag">Rule of 40</span>
+          <span class="proj-tag">Scenario Analysis</span>
+          <span class="proj-tag">Implied EV</span>
         </div>
       </div>
-    </article>
+      <div class="proj-cta">
+        <a class="btn-view" href="https://felicianae.github.io/fpa-portfolio/hubs_dashboard.html" target="_blank">
+          View Dashboard
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
 
-    <!-- PROJECT 3: Cloudflare -->
-    <article class="project-card">
-      <div class="card-inner">
-        <div>
-          <p class="card-number">03</p>
-          <p class="card-company">Cloudflare Inc. · NET</p>
-          <h2 class="card-title">TMT Equity Research Package</h2>
-          <p class="card-desc">
-            Institutional-grade equity research on Cloudflare: verified three-statement financial model,
-            SaaS metrics model (DBNER, cohort analysis, ARR build), DCF and comparable company valuation,
-            and a full written research note. Covers the AI-native infrastructure thesis and competitive
-            positioning vs. Fastly, Zscaler, and hyperscalers.
-          </p>
-          <div class="card-tags">
-            <span class="tag">3-Statement Model</span>
-            <span class="tag">DCF Valuation</span>
-            <span class="tag">SaaS Metrics</span>
-            <span class="tag">Comps</span>
-            <span class="tag">Research Note</span>
-            <span class="tag">TMT</span>
-          </div>
-          <div class="card-metrics">
-            <div class="metric">
-              <div class="metric-val">NET</div>
-              <div class="metric-label">NYSE · $~35B mkt cap</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val">3-Statement + DCF</div>
-              <div class="metric-label">Verified model + research note</div>
-            </div>
-          </div>
-        </div>
-        <div class="card-cta">
-          <a class="btn-launch" href="https://felicianae.github.io/fpa-portfolio/Cloudflare_Dashboard.html" target="_blank">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Launch Dashboard
-          </a>
+    <!-- 03 Cloudflare -->
+    <div class="project-row">
+      <div class="proj-num">03</div>
+      <div class="proj-body">
+        <p class="proj-co">Cloudflare Inc. · NET · NYSE</p>
+        <h2 class="proj-title">TMT Equity Research — Initiating Coverage</h2>
+        <p class="proj-desc">
+          Institutional-grade initiating coverage. BUY · $200 price target · June 2026.
+          Verified three-statement model, SaaS metrics (DBNER, NRR recovery trajectory,
+          large customer cohorts), DCF and six-peer comparable company valuation, full
+          written research note. Investment thesis: AI/agentic infrastructure positioning,
+          NRR recovery from 111% trough to 120%, Rule of 40 expanding toward 50%+.
+        </p>
+        <div class="proj-tags">
+          <span class="proj-tag">3-Statement Model</span>
+          <span class="proj-tag">DCF</span>
+          <span class="proj-tag">Comps</span>
+          <span class="proj-tag">SaaS Metrics</span>
+          <span class="proj-tag">Research Note</span>
+          <span class="proj-tag">BUY · $200</span>
         </div>
       </div>
-    </article>
-
+      <div class="proj-cta">
+        <a class="btn-view" href="https://felicianae.github.io/fpa-portfolio/Cloudflare_Dashboard.html" target="_blank">
+          View Dashboard
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
+      </div>
+    </div>
   </section>
 
-  <section class="skills-strip">
-    <div class="skills-grid">
-      <div class="skill-cell">
-        <p class="skill-label">Modeling</p>
-        <p class="skill-items">Excel / VBA · Python · SQL<br />3-statement · DCF · ARR waterfall<br />Scenario & sensitivity</p>
-      </div>
-      <div class="skill-cell">
-        <p class="skill-label">Visualization</p>
-        <p class="skill-items">HTML / CSS / JS dashboards<br />Power BI · Tableau · Domo<br />Executive-ready reporting</p>
-      </div>
-      <div class="skill-cell">
-        <p class="skill-label">Domain</p>
-        <p class="skill-items">SaaS unit economics · FP&amp;A<br />Marketplace GMV dynamics<br />TMT equity research</p>
+  <section class="capabilities">
+    <div class="cap-inner">
+      <p class="cap-label">Capabilities</p>
+      <div class="cap-grid">
+        <div class="cap-col">
+          <h3 class="cap-title">Modeling</h3>
+          <p class="cap-items">
+            Excel · Python · SQL<br />
+            3-statement · DCF · ARR waterfall<br />
+            Scenario &amp; sensitivity analysis<br />
+            Driver-based forecasting
+          </p>
+        </div>
+        <div class="cap-col">
+          <h3 class="cap-title">Visualization</h3>
+          <p class="cap-items">
+            HTML / CSS / JS dashboards<br />
+            Power BI · Tableau · Domo<br />
+            Executive reporting<br />
+            AI workflow integration
+          </p>
+        </div>
+        <div class="cap-col">
+          <h3 class="cap-title">Domain</h3>
+          <p class="cap-items">
+            SaaS unit economics<br />
+            Marketplace GMV dynamics<br />
+            TMT equity research<br />
+            Strategic finance &amp; FP&amp;A
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   <footer>
-    <p class="footer-left">felice · strategic finance portfolio</p>
-    <div class="footer-right">
-      <a href="https://github.com/felicianae/fpa-portfolio" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/" target="_blank">LinkedIn</a>
+    <div class="footer-inner">
+      <p class="footer-left">Feliciana — Strategic Finance Portfolio, 2026</p>
+      <div class="footer-right">
+        <a href="https://github.com/felicianae/fpa-portfolio" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/" target="_blank">LinkedIn</a>
+      </div>
     </div>
   </footer>
 
